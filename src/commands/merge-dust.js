@@ -1,20 +1,4 @@
 const inquirer = require('inquirer');
-const config = require('../depends/blackcoin-config.js');
-const blackcoin = require("node-blackcoin-more");
-
-function warn() {
-  if (!config.user || !config.password || !config.host || !config.port) {
-    console.log(`blk/src/depends/blackcoin-config.js requires host, port, rpcuser and rpcpassword.`);
-    process.exit(0);
-  }
-}
-warn()
-
-const client = new blackcoin.Client(config);
-
-const {
-  listunspent,
-} = require('../depends/blackcoin-wallet');
 
 const {
   createrawtransaction,
@@ -24,17 +8,23 @@ const {
 } = require('../depends/blackcoin-rawtx');
 
 
-async function main() {
+const {
+  listunspent,
+} = require('../depends/blackcoin-wallet');
+
+async function mergeDust() {
   let dustAmount;
   let sendToAddress;
 
-  const {dust} = await inquirer.prompt([
-    {
-      name: 'dust',
-      message: `Enter amount in Satoshis to use as dust threshold, or press ENTER to use default (5500 Satoshis).`,
-      default: 5500
-    },
-  ]);
+  const dust = 9999999
+
+  // const {dust} = await inquirer.prompt([
+  //   {
+  //     name: 'dust',
+  //     message: `Enter amount in Satoshis to use as dust threshold, or press ENTER to use default (5500 Satoshis).`,
+  //     default: 5500
+  //   },
+  // ]);
 
   dustAmount = Number(dust);
 
@@ -52,7 +42,7 @@ async function main() {
   //
   console.log(`Searching for Addresses with UTXOs with amount less than or equal to ${dustAmount}`);
   let addressesWithDust = [];
-  const list = await listunspent(10,9999999);
+  const list = await listunspent();
   const sortedByAddress = list.reduce( (accumulator, utxo) => {
     const address = utxo.address;
     const amount = utxo.amount * 100000000;
@@ -88,30 +78,42 @@ async function main() {
     }
   }
 
-  const {addresses} = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'addresses',
-      message: 'Select an address',
-      choices: addressesWithDust,
-    },
-  ]);
+  const addresses = addressesWithDust[0];
+
+  // const {addresses} = await inquirer.prompt([
+  //   {
+  //     type: 'list',
+  //     name: 'addresses',
+  //     message: 'Select an address',
+  //     choices: addressesWithDust,
+  //   },
+  // ]);
 
   const selectedDustArray = sortedByAddress[addresses];
 
-  const {confirmAddress} = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'confirmAddress',
-      message: `Selected address: ${addresses}? Total Dust UTXOs: ${selectedDustArray.length}.`,
-      choices: ['Continue', 'Cancel'],
-    },
-  ]);
+  const {confirmAddress} = 'Continue'
 
-  if (confirmAddress === 'Cancel') {
-    console.log('Aborted by user.');
-    process.exit(0);
-  }
+
+  const MaxNumUtxos = 677;
+  const totalDustTX = selectedDustArray.length
+
+  const repeat = totalDustTX/MaxNumUtxos
+  console.log(`Try: \n for n in {1..${repeat}}; do blk merge-dust; done`);
+
+  // const {confirmAddress} = await inquirer.prompt([
+  //   {
+  //     type: 'list',
+  //     name: 'confirmAddress',
+  //     message: `Selected address: ${addresses}? Total Dust UTXOs: ${totalDustTX}.`,
+  //     choices: ['Continue', 'Cancel'],
+  //   },
+  // ]);
+
+  // if (confirmAddress === 'Cancel') {
+  //   console.log('Aborted by user.');
+  //   process.exit(0);
+  // }
+  
 
   const selectedUtxos = [];
   let fee = 0;
@@ -119,9 +121,8 @@ async function main() {
 
   // The maximum number of UTXOs that will be included in a transaction
   //
-  let MaxNumUtxos = 666;
 
-  console.log(`selecting from ${selectedDustArray.length} outputs for address: ${addresses}`);
+  console.log(`selecting from ${totalDustTX} outputs for address: ${addresses}`);
   while (selectedUtxos.length < MaxNumUtxos && selectedDustArray.length > 0) {
     const utxo =  selectedDustArray.pop();
     const amount = utxo.amount * 100000000;
@@ -151,18 +152,24 @@ async function main() {
   fee = (decoded.size * 10) + 148;
   console.log('Calculated Fee: ', fee);
   sendAmount = (total - fee) / 100000000;
-  const {confirmTxn} = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'confirmTxn',
-      message: `Send ${sendAmount} to ${addresses} with fee ${fee / 100000000}? Total amount: ${total / 100000000}`,
-      choices: ['Send', 'Cancel'],
-    },
-  ]);
-  if (confirmTxn === 'Cancel') {
-    console.log('Aborted by user.');
-    process.exit(0);
-  }
+
+  const confirmTxn = 'Send'
+
+
+  // const {confirmTxn} = await inquirer.prompt([
+  //   {
+  //     type: 'list',
+  //     name: 'confirmTxn',
+  //     message: `Send ${sendAmount} to ${addresses} with fee ${fee / 100000000}? Total amount: ${total / 100000000}`,
+  //     choices: ['Send', 'Cancel'],
+  //   },
+
+  // if (confirmTxn === 'Cancel') {
+  //   console.log('Aborted by user.');
+  //   process.exit(0);
+  // }
+  // ]);
+
   // Recreate the txn with the approved fee
   //
   send[addresses] = sendAmount;
@@ -175,4 +182,4 @@ async function main() {
   console.log('Sent!', txid);
 }
 
-main().catch(err => console.log(err));
+mergeDust().catch(err => console.log(err));

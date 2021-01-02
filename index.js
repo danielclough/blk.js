@@ -40,8 +40,10 @@ blk
 	});
 
 blk
-	.command('unlock', 'Unlock Wallet', 'unlock')
+	.command('unlock')
+	.description('Unlock your wallet for 5 minutes.')
 	.action(() => {
+		const unlock = require('./src/commands/unlock.js')
 	});
 
 
@@ -51,3 +53,6 @@ blk
 	.version(config.version)
 	.parse(process.argv)
 
+if (process.argv.length < 3) {
+  blk.help();
+}

@@ -1,4 +1,16 @@
 const blackcoin = require("node-blackcoin-more");
+const config = require('./blackcoin-config.js');
+
+
+function warn() {
+  if (!config.user || !config.pass || !config.host || !config.port) {
+    console.log(`blk/src/depends/blackcoin-config.js requires host, port, user and password.`);
+    process.exit(0);
+  }
+}
+warn()
+
+const client = new blackcoin.Client(config);
 
 function createrawtransaction(utxos, output) {
   return new Promise((resolve, reject) => {
@@ -72,3 +84,15 @@ function signrawtransaction(raw) {
   });
 }
 
+module.exports = (function(){
+  return {
+    createrawtransaction,
+    decoderawtransaction,
+    decodescript,
+    fundrawtransaction,
+    getnormalizedtxid,
+    getrawtransaction,
+    sendrawtransaction,
+    signrawtransaction,
+  }
+})();

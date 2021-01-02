@@ -1,5 +1,16 @@
 const blackcoin = require("node-blackcoin-more");
+const config = require('./blackcoin-config.js');
 
+
+function warn() {
+  if (!config.user || !config.pass || !config.host || !config.port) {
+    console.log(`blk/src/depends/blackcoin-config.js requires host, port, user and password.`);
+    process.exit(0);
+  }
+}
+warn()
+
+const client = new blackcoin.Client(config);
 
 function abandontransaction(txid) {
   return new Promise((resolve, reject) => {
@@ -256,9 +267,9 @@ function listtransactions(account, count, from, includeWatchonly) {
   });
 }
 
-function listunspent(minconf, maxconf, address) {
+function listunspent() {
   return new Promise((resolve, reject) => {
-    client.cmd('listunspent',minconf, maxconf, address, function(err, data){
+    client.cmd('listunspent', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -366,7 +377,7 @@ function walletlock() {
 
 function walletpassphrase(passphrase, timeout, stakingonly) {
   return new Promise((resolve, reject) => {
-    client.cmd('walletpassphrase', function(err, data){
+    client.cmd('walletpassphrase', passphrase, timeout, stakingonly, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -381,3 +392,50 @@ function walletpassphrasechange(walletpassphrasechange, oldpassphrase, newpassph
     });
   });
 }
+
+module.exports = (function(){
+  return {
+    abandontransaction,
+    abortrescan,
+    addmultisigaddress,
+    backupwallet,
+    burn,
+    dumpprivkey,
+    dumpwallet,
+    getbalance,
+    getnewaddress,
+    getrawchangeaddress,
+    getreceivedbyaccount,
+    getreceivedbyaddress,
+    gettransaction,
+    getunconfirmedbalance,
+    getwalletinfo,
+    importaddress,
+    importprivkey,
+    importprunedfunds,
+    importpubkey,
+    importwallet,
+    keypoolrefill,
+    listaccounts,
+    listaddressgroupings,
+    listlockunspent,
+    listreceivedbyaccount,
+    listreceivedbyaddress,
+    listsinceblock,
+    listtransactions,
+    listunspent,
+    lockunspent,
+    move,
+    removeprunedfunds,
+    reservebalance,
+    sendfrom,
+    sendmany,
+    sendtoaddress,
+    setaccount,
+    settxfee,
+    signmessage,
+    walletlock,
+    walletpassphrase,
+    walletpassphrasechange,
+  }
+})();
