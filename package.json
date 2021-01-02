@@ -1,5 +1,5 @@
 {
-  "name": "blk",
+  "name": "blk.js",
   "version": "0.0.1",
   "description": "Blackcoin Command Line Utility",
   "main": "index.js",
