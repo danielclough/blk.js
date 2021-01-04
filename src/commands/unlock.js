@@ -7,12 +7,12 @@ const {
 async function unlock() {
   let {password} = await inquirer.prompt([
     {
-      password: 'password',
+      name: 'password',
       message: `Enter your password: `
     },
   ]);
 
-walletpassphrase(password, 300, false)
+walletpassphrase(password, 9999999, false)
 
 }
 unlock().catch(err => console.log(err));
