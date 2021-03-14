@@ -5,16 +5,16 @@ let search
 cryptoid = function(query, secondArgument) {
 	switch (query) {
 		case lasttxs || txinfo:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
+			const searchT = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
 		break;
 		case addressfirstseen || getbalance || getreceivedbyaddress || richrank:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&a=" + secondArgument
+			const searchA = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&a=" + secondArgument
 		break;
 		case getblockhash || getblocktime:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" + secondArgument
+			const searchHeight = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" + secondArgument
 		break;
 		case getblockheight:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" + secondArgument
+			const searchHash = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" + secondArgument
 		break;
 		default:
 			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query
