@@ -36,25 +36,25 @@ blk
 
 /*Query CryptoID*/
 const cryptoidWords = `
-	Basic:
-	    getblockcount: current block height
-	    nodes: list of recently seen nodes
-	    rich: rich list top 1000
-	    ticker.btc: price in BTC
-	    ticker.usd: price in USD
-	    totalcoins: total coins
-	Addresses:
-	    addressfirstseen <address>: date and time the address was first seen
-	    getbalance <address>: balance of the address (~6 hours delay)
-	    getreceivedbyaddress <address>: amount received by the address (sum of vout)
-	    richrank <address>: rich list rank for address
-	Transactions:
+	Basic: (single argument)
+		getblockcount: current block height
+		nodes: list of recently seen nodes
+		rich: rich list top 1000
+		ticker.btc: price in BTC
+		ticker.usd: price in USD
+		totalcoins: total coins
+	Addresses: (second argument is an address)
+		addressfirstseen <address>: date and time the address was first seen
+		getbalance <address>: balance of the address (~6 hours delay)
+		getreceivedbyaddress <address>: amount received by the address (sum of vout)
+		richrank <address>: rich list rank for address
+	Transactions: (second argument is a txhash)
 		lasttxs <txhash>: the last ten transactions (with at least one confirmation), excluding coinbase and stake transactions
-	    txinfo <txhash>:  summary information about a transaction (confirmations, fees, inputs & output addresses and amounts)
-	Blocks:
+		txinfo <txhash>:  summary information about a transaction (confirmations, fees, inputs & output addresses and amounts)
+	Blocks: (second argument is height or block hash)
 		getblockhash <height>: returns corresponding block hash
-	    getblocktime <height>: returns unixtime of the block
-	    getblockheight <hash>: returns corresponding block height
+		getblocktime <height>: returns unixtime of the block
+		getblockheight <hash>: returns corresponding block height
 `
 blk
 	.command('cryptoid <query>')
