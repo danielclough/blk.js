@@ -19,8 +19,8 @@ async function unlock() {
       type: 'list',
       name: 'stakingonly',
       message: `Unlock for staking only?`,
-      choices: [true, false],
-      default: true
+      choices: ['true', 'false'],
+      default: 'true'
     },
   ]);
 
