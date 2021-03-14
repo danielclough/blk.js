@@ -5,19 +5,19 @@ let search
 cryptoid = function(query, secondArgument) {
 	switch (query) {
 		case 'lasttxs' || 'txinfo':
-			let search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
+			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
 		break;
 		case 'addressfirstseen' || 'getbalance' || 'getreceivedbyaddress' || 'richrank':
-			let search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&a=" + secondArgument
+			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&a=" + secondArgument
 		break;
 		case 'getblockhash' || 'getblocktime':
-			let search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" + secondArgument
+			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" + secondArgument
 		break;
 		case 'getblockheight':
-			let search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" + secondArgument
+			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" + secondArgument
 		break;
 		default:
-			let search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query
+			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query
 
 	}
 	axios.get(search).then(resp => {
