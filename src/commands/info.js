@@ -4,17 +4,24 @@ const {getinfo} = require('../depends/blackcoin-control')
 const {getnetworkinfo} = require('../depends/blackcoin-network')
 
 async function info() {
-	getwalletinfo()
-	getwalletinfo().catch(err => console.log(err));
+	let walletInfo = await getwalletinfo().catch(err => 
+		console.log(getwalletinfo, err)
+	    process.exit(0)
+	);
 
-/*	getstakinginfo()
-	getstakinginfo().catch(err => console.log(err));
+	let stakingInfo = await getstakinginfo().catch(err => 
+		console.log(getstakinginfo, err)
+	    process.exit(0)
+	);
 
-	getinfo()
-	getinfo().catch(err => console.log(err));
+	let info = await getinfo().catch(err => 
+		console.log(getinfo, err)
+	    process.exit(0)
+	);
 
-	getnetworkinfo()
-	getnetworkinfo().catch(err => console.log(err));
-	*/
+	let networkInfo = await getnetworkinfo().catch(err => 
+		console.log(getnetworkinfo, err)
+	    process.exit(0)
+	);
 }
 info().catch(err => console.log(err));
