@@ -377,7 +377,7 @@ function walletlock() {
 
 function walletpassphrase(passphrase, timeout, stakingonly) {
   return new Promise((resolve, reject) => {
-    client.cmd('walletpassphrase' + passphrase + timeout + stakingonly, function(err, data){
+    client.cmd(`walletpassphrase ${passphrase} ${timeout} ${stakingonly}`, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
