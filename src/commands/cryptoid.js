@@ -11,10 +11,10 @@ cryptoid = function(query, secondArgument) {
 			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&a=" + secondArgument
 		break;
 		case getblockhash || getblocktime:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" secondArgument
+			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&height=" + secondArgument
 		break;
 		case getblockheight:
-			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" secondArgument
+			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&hash=" + secondArgument
 		break;
 		default:
 			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query
