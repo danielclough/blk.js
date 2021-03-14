@@ -7,14 +7,14 @@ async function unlock() {
   let stakingonly
   let passphrase 
 
-  const passphrase = await inquirer.prompt([
+  passphrase = await inquirer.prompt([
     {
       name: 'passphrase',
       message: `What is your passphrase?`,
     },
   ]);
 
-  const stakingonly = await inquirer.prompt([
+  stakingonly = await inquirer.prompt([
     {
       type: 'list',
       name: 'stakingonly',
