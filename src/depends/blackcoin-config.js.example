@@ -1,6 +1,6 @@
 module.exports = {
   host: 'localhost',
   port: 15715,
-  rpcuser: 'username',
-  rpcpassword: 'superlongpassword'
+  user: 'username',
+  pass: 'superlongpassword'
 }

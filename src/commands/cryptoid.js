@@ -3,7 +3,7 @@ const chalk = require('chalk');
 let search
 
 cryptoid = function(query, secondArgument) {
-	switch (query, secondArgument) {
+	switch (query) {
 		case lasttxs || txinfo:
 			const search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
 		break;
