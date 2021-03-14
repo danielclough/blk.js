@@ -7,15 +7,14 @@ async function unlock() {
   let stakingonly
   let passphrase 
 
-  const response = await inquirer.prompt([
+  const passphrase = await inquirer.prompt([
     {
       name: 'passphrase',
       message: `What is your passphrase?`,
     },
   ]);
-  passphrase = response.passphrase;
 
-  const response = await inquirer.prompt([
+  const stakingonly = await inquirer.prompt([
     {
       type: 'list',
       name: 'stakingonly',
@@ -24,7 +23,6 @@ async function unlock() {
       default: true
     },
   ]);
-  stakingonly = response.stakingonly;
 
   walletpassphrase(passphrase, timeout, stakingonly)
   walletpassphrase().catch(err => console.log(err));
