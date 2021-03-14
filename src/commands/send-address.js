@@ -1,13 +1,14 @@
 const parseArgs = require('commander'); 
 const inquirer = require('inquirer');
 const {
-  createRawTxn,
-  createWallet,
-  decodeRawTxn,
-  listUnspent,
-  sendRawTxn,
-  signRawTxn,
-} = require('../depends/blackcoin');
+  listunspent,
+} = require('../depends/blackcoin-wallet');
+
+const {
+  createrawtransaction,
+  sendrawtransaction,
+  signrawtransaction,
+} = require('../depends/blackcoin-rawtx');
 
 /*
   If sendFrom and sendTo are passed as arguments script will run without user interaction.
@@ -20,7 +21,7 @@ const {
 
 async function main(to, from) {
 
-  const list = await listUnspent();
+  const list = await listunspent();
 
   const addresses = new Set();
   const utxosSortedByAddress = list.reduce( (accumulator, utxo) => {
@@ -94,18 +95,18 @@ async function main(to, from) {
       const send = {};
       send[sendTo] = sendAmount;
       console.log(`Creating txn to send ${sendAmount} from ${sendFrom} to ${sendTo}`);
-      let rawTxn = await createRawTxn([utxo], send).catch((err) => {
-        console.log('createRawTxn Error.', err);
+      let rawTxn = await createrawtransaction([utxo], send).catch((err) => {
+        console.log('createrawtransaction Error.', err);
         console.log('Error creating raw transaction with utxo:', utxo);
         process.exit(0);
       });
-      const signedTxn = await signRawTxn(rawTxn).catch((err) => {
-        console.log('signRawTxn',err);
+      const signedTxn = await signrawtransaction(rawTxn).catch((err) => {
+        console.log('signrawtransaction',err);
         console.log('Error signing raw transaction:', rawTxn);
         process.exit(0);
       });
-      const txid = await sendRawTxn(signedTxn.hex).catch((err) => {
-        console.log('sendRawTxn', err);
+      const txid = await sendrawtransaction(signedTxn.hex).catch((err) => {
+        console.log('sendrawtransaction', err);
         console.log('Error sending signed transaction hex:', signedTxn);
         process.exit(0);
       });

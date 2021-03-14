@@ -12,10 +12,21 @@ warn()
 
 const client = new blackcoin.Client(config);
 
-const {
-  listunspent,
-} = require('../depends/blackcoin-wallet')
+const {getwalletinfo} = require('../depends/blackcoin-wallet')
+const {getstakinginfo} = require('../depends/blackcoin-mining')
+const {getinfo} = require('../depends/blackcoin-control')
+const {getnetworkinfo} = require('../depends/blackcoin-network')
 
-listunspent(10,9999999);
 
-listunspent().catch(err => console.log(err));
+
+getwalletinfo()
+getwalletinfo().catch(err => console.log(err));
+
+getstakinginfo()
+getstakinginfo().catch(err => console.log(err));
+
+getinfo()
+getinfo().catch(err => console.log(err));
+
+getnetworkinfo()
+getnetworkinfo().catch(err => console.log(err));

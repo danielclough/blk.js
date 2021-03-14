@@ -1,5 +1,0 @@
-blkc
-	.command('')
-	.action(() => {
-		
-});

@@ -2,7 +2,7 @@ const blackcoin = require("node-blackcoin-more");
 
 function addnode(node, arg) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('addnode', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -11,7 +11,7 @@ function addnode(node, arg) {
 
 function clearbanned() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('clearbanned', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -20,7 +20,7 @@ function clearbanned() {
 
 function disconnectnode(node) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('disconnectnode', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -29,7 +29,7 @@ function disconnectnode(node) {
 
 function getaddednodeinfo(dummy, node) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('getaddednodeinfo', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -38,7 +38,7 @@ function getaddednodeinfo(dummy, node) {
 
 function getconnectioncount() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('getconnectioncount', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -47,7 +47,7 @@ function getconnectioncount() {
 
 function getnettotals() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('getnettotals', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -56,7 +56,7 @@ function getnettotals() {
 
 function getnetworkinfo() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('getnetworkinfo', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -65,7 +65,7 @@ function getnetworkinfo() {
 
 function getpeerinfo() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('getpeerinfo', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -74,7 +74,7 @@ function getpeerinfo() {
 
 function listbanned() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('listbanned', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -83,18 +83,18 @@ function listbanned() {
 
 function ping() {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('ping', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
   });
 }
 
-function(setban, ip, arg, bantime, absolute) {
+/*function(setban, ip, arg, bantime, absolute) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', function(err, data){
+    client.cmd('setban', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
   });
-}
+}*/

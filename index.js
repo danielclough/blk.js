@@ -9,15 +9,6 @@ blk
 		const info = require('./src/commands/info.js')
 	});
 
-/*Query CryptoID*/
-blk
-	.command('cryptoid <query>')
-	.description('totalcoins, nodes, tickerUsd, tickerBtc, getblockcount, circulating')
-	.action((query) => {
-		const cryptoid = require('./src/commands/cryptoid.js')
-		cryptoid(query);
-	});
-
 
 blk
 	.command('send-address [from] [to]')
@@ -35,13 +26,41 @@ blk
 	});
 
 blk
-	.command('stake', 'Unlock for Staking Only', 'stake')
+	.command('unlock')
+	.description('Unlock Wallet')
 	.action(() => {
+		const unlock = require('./src/commands/unlock.js')
 	});
 
+
+/*Query CryptoID*/
+const cryptoidWords = `
+Basic:
+    getblockcount: current block height
+    nodes: list of recently seen nodes
+    rich: rich list top 1000
+    ticker.btc: price in BTC
+    ticker.usd: price in USD
+    totalcoins: total coins
+Addresses:
+    addressfirstseen <address>: date and time the address was first seen
+    getbalance <address>: balance of the address (~6 hours delay)
+    getreceivedbyaddress <address>: amount received by the address (sum of vout)
+    richrank <address>: rich list rank for address
+Transactions:
+	lasttxs <txhash>: the last ten transactions (with at least one confirmation), excluding coinbase and stake transactions
+    txinfo <txhash>:  summary information about a transaction (confirmations, fees, inputs & output addresses and amounts)
+Blocks:
+	getblockhash <height>: returns corresponding block hash
+    getblocktime <height>: returns unixtime of the block
+    getblockheight <hash>: returns corresponding block height
+`
 blk
-	.command('unlock', 'Unlock Wallet', 'unlock')
-	.action(() => {
+	.command('cryptoid <query>')
+	.description(cryptoidWords)
+	.action((query, secondArgument) => {
+		const cryptoid = require('./src/commands/cryptoid.js')
+		cryptoid(query);
 	});
 
 
