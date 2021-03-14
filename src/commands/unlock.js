@@ -24,7 +24,7 @@ async function unlock() {
     },
   ]);
 
-  walletpassphrase(passphrase, timeout, stakingonly)
+  walletpassphrase(passphrase timeout stakingonly)
   walletpassphrase().catch(err => console.log(err));
 }
 unlock().catch(err => console.log(err));
