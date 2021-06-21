@@ -1,8 +1,8 @@
-const axios = require('axios');
-const chalk = require('chalk');
+import axios from 'axios'
+import chalk from 'chalk'
 let search
 
-cryptoid = function(query, secondArgument) {
+const cryptoid = (query, secondArgument) => {
 	switch (query) {
 		case 'lasttxs' || 'txinfo':
 			search = "https://chainz.cryptoid.info/blk/api.dws?q=" + query + "&t=" + secondArgument
@@ -28,4 +28,4 @@ cryptoid = function(query, secondArgument) {
 	})
 }
 
-module.exports = cryptoid
+export default cryptoid

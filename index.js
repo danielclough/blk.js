@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-const pjson = require('./package.json');
-const blk = require('commander')
-const version = pjson.version
+// import pjson from './package.json'
+import cryptoid from './src/commands/cryptoid.js'
+import blk from 'commander'
+const version = "0.0.6"
 
 blk
 	.command('info')
@@ -60,7 +61,6 @@ blk
 	.command('cryptoid <query>')
 	.description(cryptoidWords)
 	.action((query, secondArgument) => {
-		const cryptoid = require('./src/commands/cryptoid.js')
 		cryptoid(query, secondArgument);
 	});
 
