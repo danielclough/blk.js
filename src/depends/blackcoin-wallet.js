@@ -1,14 +1,6 @@
 import blackcoin from 'node-blackcoin-more'
-import config from '../../config.js'
-
-export function warn() {
-  if (!config.user || !config.pass || !config.host || !config.port) {
-    console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
-    console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
-    process.exit(0);
-  }
-}
-warn()
+import config from './config.js'
+config.warn()
 
 const client = new blackcoin.Client(config);
 
@@ -392,48 +384,3 @@ export function walletpassphrasechange(walletpassphrasechange, oldpassphrase, ne
     });
   });
 }
-
-/*export {
-  abandontransaction,
-  abortrescan,
-  addmultisigaddress,
-  backupwallet,
-  burn,
-  dumpprivkey,
-  dumpwallet,
-  getbalance,
-  getnewaddress,
-  getrawchangeaddress,
-  getreceivedbyaccount,
-  getreceivedbyaddress,
-  gettransaction,
-  getunconfirmedbalance,
-  getwalletinfo,
-  importaddress,
-  importprivkey,
-  importprunedfunds,
-  importpubkey,
-  importwallet,
-  keypoolrefill,
-  listaccounts,
-  listaddressgroupings,
-  listlockunspent,
-  listreceivedbyaccount,
-  listreceivedbyaddress,
-  listsinceblock,
-  listtransactions,
-  listunspent,
-  lockunspent,
-  move,
-  removeprunedfunds,
-  reservebalance,
-  sendfrom,
-  sendmany,
-  sendtoaddress,
-  setaccount,
-  settxfee,
-  signmessage,
-  walletlock,
-  walletpassphrase,
-  walletpassphrasechange,
-}*/
