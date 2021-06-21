@@ -1,8 +1,8 @@
 import blackcoin from 'node-blackcoin-more'
 import config from './config.js'
-config.warn()
 
 const client = new blackcoin.Client(config);
+
 export function addnode(node, arg) {
   return new Promise((resolve, reject) => {
     client.cmd('addnode', function(err, data){

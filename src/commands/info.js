@@ -1,7 +1,7 @@
-import { getwalletinfo } from '../depends/blackcoin-wallet.js'
-import { getstakinginfo } from '../depends/blackcoin-mining.js'
-import { getinfo } from '../depends/blackcoin-control.js'
-import { getnetworkinfo } from '../depends/blackcoin-network.js'
+import { getwalletinfo } from '../depends/wallet.js'
+import { getstakinginfo } from '../depends/mining.js'
+import { getinfo } from '../depends/control.js'
+import { getnetworkinfo } from '../depends/network.js'
 
 async function info() {
 	let walletInfo = await getwalletinfo().catch(err => {
@@ -24,6 +24,5 @@ async function info() {
 	    process.exit(0)
 	});
 }
-info().catch(err => console.log(err));
 
 export default info

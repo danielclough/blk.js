@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { walletpassphrase } from '../depends/blackcoin-wallet.js'
+import { walletpassphrase } from '../depends/wallet.js'
 
 async function unlock() {
   let timeout = 9999999 
@@ -22,8 +22,5 @@ async function unlock() {
   ]);
 
   walletpassphrase(passphrase, timeout, stakingonly)
-  walletpassphrase().catch(err => console.log(err));
 }
-unlock().catch(err => console.log(err));
-
 export default unlock

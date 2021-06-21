@@ -1,31 +1,35 @@
 import blackcoin from 'node-blackcoin-more'
 import config from './config.js'
-config.warn()
 
 const client = new blackcoin.Client(config);
 
-
-export function getstakinginfo() {
+export function getinfo() {
   return new Promise((resolve, reject) => {
-    client.cmd('getstakinginfo', function(err, data){
+    client.cmd('getinfo', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
   });
 }
-
-export function generate(numblocks, maxtries) {
+// export function help(command) {
+//   return new Promise((resolve, reject) => {
+//     client.cmd('help', function(err, data){
+//       if (err) return reject(err);
+//       resolve(data);
+//     });
+//   });
+// }
+export function stop() {
   return new Promise((resolve, reject) => {
-    client.cmd('generate', function(err, data){
+    client.cmd('stop', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
   });
 }
-
-export function generatetoaddress(numblocks, address, maxtries) {
+export function uptime() {
   return new Promise((resolve, reject) => {
-    client.cmd('generatetoaddress', function(err, data){
+    client.cmd('uptime', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });

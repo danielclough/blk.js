@@ -1,10 +1,9 @@
 import blackcoin from 'node-blackcoin-more'
 import config from './config.js'
-config.warn()
 
 const client = new blackcoin.Client(config);
 
-function getbestblockhash() {
+export function getbestblockhash() {
   return new Promise((resolve, reject) => {
     client.cmd('getbestblockhash', function(err, data){
       if (err) return reject(err);
@@ -12,7 +11,7 @@ function getbestblockhash() {
     });
   });
 }
-function getblock (hash, verbose) {
+export function getblock (hash, verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getblock', function(err, data){
       if (err) return reject(err);
@@ -20,7 +19,7 @@ function getblock (hash, verbose) {
     });
   });
 }
-function getblockchaininfo() {
+export function getblockchaininfo() {
   return new Promise((resolve, reject) => {
     client.cmd('getblockchaininfo', function(err, data){
       if (err) return reject(err);
@@ -28,7 +27,7 @@ function getblockchaininfo() {
     });
   });
 }
-function getblockcount() {
+export function getblockcount() {
   return new Promise((resolve, reject) => {
     client.cmd('getblockcount', function(err, data){
       if (err) return reject(err);
@@ -36,7 +35,7 @@ function getblockcount() {
     });
   });
 }
-function getblockhash(index) {
+export function getblockhash(index) {
   return new Promise((resolve, reject) => {
     client.cmd('getblockhash', function(err, data){
       if (err) return reject(err);
@@ -44,7 +43,7 @@ function getblockhash(index) {
     });
   });
 }
-function getblockheader(hash, verbose) {
+export function getblockheader(hash, verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getblockheader', function(err, data){
       if (err) return reject(err);
@@ -52,7 +51,7 @@ function getblockheader(hash, verbose) {
     });
   });
 }
-function getchaintips() {
+export function getchaintips() {
   return new Promise((resolve, reject) => {
     client.cmd('getchaintips', function(err, data){
       if (err) return reject(err);
@@ -60,7 +59,7 @@ function getchaintips() {
     });
   });
 }
-function getdifficulty() {
+export function getdifficulty() {
   return new Promise((resolve, reject) => {
     client.cmd('getdifficulty', function(err, data){
       if (err) return reject(err);
@@ -68,7 +67,7 @@ function getdifficulty() {
     });
   });
 }
-function getmempoolancestors(txid, verbose) {
+export function getmempoolancestors(txid, verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getmempoolancestors', function(err, data){
       if (err) return reject(err);
@@ -76,7 +75,7 @@ function getmempoolancestors(txid, verbose) {
     });
   });
 }
-function getmempooldescendants(txid, verbose) {
+export function getmempooldescendants(txid, verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getmempooldescendants', function(err, data){
       if (err) return reject(err);
@@ -84,7 +83,7 @@ function getmempooldescendants(txid, verbose) {
     });
   });
 }
-function getmempoolentry(txid) {
+export function getmempoolentry(txid) {
   return new Promise((resolve, reject) => {
     client.cmd('getmempoolentry', function(err, data){
       if (err) return reject(err);
@@ -92,7 +91,7 @@ function getmempoolentry(txid) {
     });
   });
 }
-function getmempoolinfo() {
+export function getmempoolinfo() {
   return new Promise((resolve, reject) => {
     client.cmd('getmempoolinfo', function(err, data){
       if (err) return reject(err);
@@ -100,7 +99,7 @@ function getmempoolinfo() {
     });
   });
 }
-function getrawmempool(verbose) {
+export function getrawmempool(verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getrawmempool', function(err, data){
       if (err) return reject(err);
@@ -108,7 +107,7 @@ function getrawmempool(verbose) {
     });
   });
 }
-function gettxout(txid, n, includemempool) {
+export function gettxout(txid, n, includemempool) {
   return new Promise((resolve, reject) => {
     client.cmd('gettxout', function(err, data){
       if (err) return reject(err);
@@ -116,7 +115,7 @@ function gettxout(txid, n, includemempool) {
     });
   });
 }
-function gettxoutproof(txid, blockhash) {
+export function gettxoutproof(txid, blockhash) {
   return new Promise((resolve, reject) => {
     client.cmd('gettxoutproof', function(err, data){
       if (err) return reject(err);
@@ -124,7 +123,7 @@ function gettxoutproof(txid, blockhash) {
     });
   });
 }
-function gettxoutsetinfo() {
+export function gettxoutsetinfo() {
   return new Promise((resolve, reject) => {
     client.cmd('gettxoutsetinfo', function(err, data){
       if (err) return reject(err);
@@ -132,7 +131,7 @@ function gettxoutsetinfo() {
     });
   });
 }
-function verifychain(checklevel, numblocks) {
+export function verifychain(checklevel, numblocks) {
   return new Promise((resolve, reject) => {
     client.cmd('verifychain', function(err, data){
       if (err) return reject(err);
@@ -140,7 +139,7 @@ function verifychain(checklevel, numblocks) {
     });
   });
 }
-function verifytxoutproof(proof) {
+export function verifytxoutproof(proof) {
   return new Promise((resolve, reject) => {
     client.cmd('verifytxoutproof', function(err, data){
       if (err) return reject(err);

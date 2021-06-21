@@ -1,6 +1,5 @@
 import blackcoin from 'node-blackcoin-more'
 import config from './config.js'
-config.warn()
 
 const client = new blackcoin.Client(config);
 

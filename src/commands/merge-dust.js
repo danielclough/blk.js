@@ -4,10 +4,10 @@ import {
   decoderawtransaction,
   sendrawtransaction,
   signrawtransaction,
-} from '../depends/blackcoin-rawtx.js'
+} from '../depends/rawtx.js'
 import {
   listunspent,
-} from '../depends/blackcoin-wallet.js'
+} from '../depends/wallet.js'
 
 async function mergeDust() {
   let dustAmount;
@@ -178,7 +178,5 @@ async function mergeDust() {
   const txid = await sendrawtransaction(signedTxn.hex).catch((err) => console.log(err));
   console.log('Sent!', txid);
 }
-
-mergeDust().catch(err => console.log(err));
 
 export default mergeDust

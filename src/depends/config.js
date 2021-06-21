@@ -3,17 +3,17 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const config = {
-	"user": process.env.USER,
-	"pass": process.env.PASS,
+	"rpcuser": process.env.RPCUSER,
+	"rpcpassword": process.env.RPCPASSWORD,
 	"host": process.env.HOST,
 	"port": process.env.PORT,
 	warn() {
-	  if (!this.user || !this.pass || !this.host || !this.port) {
-	    console.log(`.env requires host, port, user and pass.`);
-	    console.log(`user: ${this.user}, pass: ${this.pass}, host: ${this.host}, port: ${this.port}`)
+	  if (!this.rpcuser || !this.rpcpassword || !this.host || !this.port) {
+	    console.log(`.env requires host, port, rpcuser and rpcpassword.`);
 	    process.exit(0);
 	  }
 	}
 }
+config.warn()
 
 export default config

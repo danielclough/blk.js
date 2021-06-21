@@ -12,30 +12,29 @@ blk
 	.command('info')
 	.option('-d, --debug', 'output extra debugging')
 	.action(() => {
-		info()
+		info().catch(err => console.log(err));
 	});
-
 
 blk
 	.command('send-address [from] [to]')
 	.option('--to', 'to address')
 	.option('--from', 'from address')
 	.action((to, from) => {
-		sendAddress()
+		sendAddress().catch(err => console.log(err));
 	});
 
 blk
 	.command('merge-dust')
 	.option('-i, --interactive', 'Interactive Mode', 'interactive')
 	.action((interactive) => {
-		mergeDust()
+		mergeDust().catch(err => console.log(err));
 	});
 
 blk
 	.command('unlock')
 	.description('Unlock Wallet')
 	.action(() => {
-		unlock()
+		unlock().catch(err => console.log(err));
 	});
 
 /*Query CryptoID*/

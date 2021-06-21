@@ -1,11 +1,11 @@
 import parseArgs from 'commander'
 import inquirer from 'inquirer'
-import { listunspent } from '../depends/blackcoin-wallet.js'
+import { listunspent } from '../depends/wallet.js'
 import {
   createrawtransaction,
   sendrawtransaction,
   signrawtransaction 
-} from '../depends/blackcoin-rawtx.js'
+} from '../depends/rawtx.js'
 
 /*
   If sendFrom and sendTo are passed as arguments script will run without user interaction.
@@ -112,7 +112,4 @@ async function sendToAddress(to, from) {
   });
 
 }
-
-sendToAddress().catch(err => console.log(err));
-
 export default sendToAddress
