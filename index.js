@@ -2,13 +2,17 @@
 // import pjson from './package.json'
 import cryptoid from './src/commands/cryptoid.js'
 import blk from 'commander'
+import info from './src/commands/info.js'
+import sendAddress from './src/commands/send-address.js'
+import mergeDust from './src/commands/merge-dust.js'
+import unlock from './src/commands/unlock.js'
 const version = "0.0.6"
 
 blk
 	.command('info')
 	.option('-d, --debug', 'output extra debugging')
 	.action(() => {
-		const info = require('./src/commands/info.js')
+		info()
 	});
 
 
@@ -17,23 +21,22 @@ blk
 	.option('--to', 'to address')
 	.option('--from', 'from address')
 	.action((to, from) => {
-		const sendAddress = require('./src/commands/send-address.js')
+		sendAddress()
 	});
 
 blk
 	.command('merge-dust')
 	.option('-i, --interactive', 'Interactive Mode', 'interactive')
 	.action((interactive) => {
-		const mergeDust = require('./src/commands/merge-dust.js')
+		mergeDust()
 	});
 
 blk
 	.command('unlock')
 	.description('Unlock Wallet')
 	.action(() => {
-		const unlock = require('./src/commands/unlock.js')
+		unlock()
 	});
-
 
 /*Query CryptoID*/
 const cryptoidWords = `

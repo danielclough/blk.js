@@ -1,16 +1,13 @@
-const inquirer = require('inquirer');
-
-const {
+import inquirer from 'inquirer'
+import {
   createrawtransaction,
   decoderawtransaction,
   sendrawtransaction,
   signrawtransaction,
-} = require('../depends/blackcoin-rawtx');
-
-
-const {
+} from '../depends/blackcoin-rawtx'
+import {
   listunspent,
-} = require('../depends/blackcoin-wallet');
+} from '../depends/blackcoin-wallet'
 
 async function mergeDust() {
   let dustAmount;
@@ -183,3 +180,5 @@ async function mergeDust() {
 }
 
 mergeDust().catch(err => console.log(err));
+
+export default mergeDust

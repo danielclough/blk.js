@@ -25,3 +25,5 @@ async function info() {
 	});
 }
 info().catch(err => console.log(err));
+
+export default info

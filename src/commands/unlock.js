@@ -1,20 +1,17 @@
-const inquirer = require('inquirer');
-
-const {walletpassphrase} = require('../depends/blackcoin-wallet')
+import inquirer from 'inquirer'
+import { walletpassphrase } from '../depends/blackcoin-wallet'
 
 async function unlock() {
   let timeout = 9999999 
-  let stakingonly
-  let passphrase 
-
-  passphrase = await inquirer.prompt([
+  
+  const passphrase = await inquirer.prompt([
     {
       name: 'passphrase',
       message: `What is your passphrase?`,
     },
   ]);
 
-  stakingonly = await inquirer.prompt([
+  const stakingonly = await inquirer.prompt([
     {
       type: 'list',
       name: 'stakingonly',
@@ -28,3 +25,5 @@ async function unlock() {
   walletpassphrase().catch(err => console.log(err));
 }
 unlock().catch(err => console.log(err));
+
+export default unlock

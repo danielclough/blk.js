@@ -1,4 +1,4 @@
-const inquirer = require('inquirer');
+import inquirer from 'inquirer'
 
 async function config() {
   configure = {
@@ -41,3 +41,5 @@ async function config() {
 configure().catch(err => console.log(err));
 
 console.log(config);
+
+export default config

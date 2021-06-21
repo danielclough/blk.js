@@ -1,5 +1,5 @@
-const blackcoin = require("node-blackcoin-more");
-const config = require('./blackcoin-config.js');
+import blackcoin from 'node-blackcoin-more'
+import config from './blackcoin-config.js'
 
 function warn() {
   if (!config.user || !config.pass || !config.host || !config.port) {

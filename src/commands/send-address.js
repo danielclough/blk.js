@@ -1,14 +1,11 @@
-const parseArgs = require('commander'); 
-const inquirer = require('inquirer');
-const {
-  listunspent,
-} = require('../depends/blackcoin-wallet');
-
-const {
+import parseArgs from 'commander'
+import inquirer from 'inquirer'
+import { listunspent } from '../depends/blackcoin-wallet'
+import {
   createrawtransaction,
   sendrawtransaction,
   signrawtransaction,
-} = require('../depends/blackcoin-rawtx');
+} from '../depends/blackcoin-rawtx'
 
 /*
   If sendFrom and sendTo are passed as arguments script will run without user interaction.
@@ -19,7 +16,7 @@ const {
   node index.js --minUtxoSize=<amount in satoshis>
 */
 
-async function main(to, from) {
+async function sendToAddress(to, from) {
 
   const list = await listunspent();
 
@@ -116,4 +113,6 @@ async function main(to, from) {
 
 }
 
-main().catch(err => console.log(err));
+sendToAddress().catch(err => console.log(err));
+
+export default sendToAddress
