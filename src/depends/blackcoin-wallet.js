@@ -1,7 +1,7 @@
 import blackcoin from 'node-blackcoin-more'
-import config from './blackcoin-config.js'
+import config from '../../config.js'
 
-function warn() {
+export function warn() {
   if (!config.user || !config.pass || !config.host || !config.port) {
     console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
     console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
@@ -12,7 +12,7 @@ warn()
 
 const client = new blackcoin.Client(config);
 
-function abandontransaction(txid) {
+export function abandontransaction(txid) {
   return new Promise((resolve, reject) => {
     client.cmd('abandontransaction', txid, function(err, data){
       if (err) return reject(err);
@@ -21,7 +21,7 @@ function abandontransaction(txid) {
   });
 }
 
-function abortrescan() {
+export function abortrescan() {
   return new Promise((resolve, reject) => {
     client.cmd('abortrescan', function(err, data){
       if (err) return reject(err);
@@ -30,7 +30,7 @@ function abortrescan() {
   });
 }
 
-function addmultisigaddress(nrequired, key, account, address_type) {
+export function addmultisigaddress(nrequired, key, account, address_type) {
   return new Promise((resolve, reject) => {
     client.cmd('addmultisigaddress', nrequired, key, account, address_type, function(err, data){
       if (err) return reject(err);
@@ -40,7 +40,7 @@ function addmultisigaddress(nrequired, key, account, address_type) {
 }
 
 
-function backupwallet(destination) {
+export function backupwallet(destination) {
   return new Promise((resolve, reject) => {
     client.cmd('backupwallet', destination, function(err, data){
       if (err) return reject(err);
@@ -49,7 +49,7 @@ function backupwallet(destination) {
   });
 }
 
-function burn(amount, hex) {
+export function burn(amount, hex) {
   return new Promise((resolve, reject) => {
     client.cmd('burn', function(err, data){
       if (err) return reject(err);
@@ -58,7 +58,7 @@ function burn(amount, hex) {
   });
 }
 
-function dumpprivkey(address) {
+export function dumpprivkey(address) {
   return new Promise((resolve, reject) => {
     client.cmd('dumpprivkey', function(err, data){
       if (err) return reject(err);
@@ -67,7 +67,7 @@ function dumpprivkey(address) {
   });
 }
 
-function dumpwallet(filename) {
+export function dumpwallet(filename) {
   return new Promise((resolve, reject) => {
     client.cmd('dumpwallet', function(err, data){
       if (err) return reject(err);
@@ -77,7 +77,7 @@ function dumpwallet(filename) {
 }
 
 
-function getbalance() {
+export function getbalance() {
   return new Promise((resolve, reject) => {
     client.cmd('getbalance', function(err, data){
       if (err) return reject(err);
@@ -86,7 +86,7 @@ function getbalance() {
   });
 }
 
-function getnewaddress() {
+export function getnewaddress() {
   return new Promise((resolve, reject) => {
     client.cmd('getnewaddress', function(err, data){
       if (err) return reject(err);
@@ -95,7 +95,7 @@ function getnewaddress() {
   });
 }
 
-function getrawchangeaddress() {
+export function getrawchangeaddress() {
   return new Promise((resolve, reject) => {
     client.cmd('getrawchangeaddress', function(err, data){
       if (err) return reject(err);
@@ -104,7 +104,7 @@ function getrawchangeaddress() {
   });
 }
 
-function getreceivedbyaccount(account, minconf) {
+export function getreceivedbyaccount(account, minconf) {
   return new Promise((resolve, reject) => {
     client.cmd('getreceivedbyaccount', minconf, function(err, data){
       if (err) return reject(err);
@@ -113,7 +113,7 @@ function getreceivedbyaccount(account, minconf) {
   });
 }
 
-function getreceivedbyaddress(address, minconf) {
+export function getreceivedbyaddress(address, minconf) {
   return new Promise((resolve, reject) => {
     client.cmd('getreceivedbyaddress', minconf, function(err, data){
       if (err) return reject(err);
@@ -122,7 +122,7 @@ function getreceivedbyaddress(address, minconf) {
   });
 }
 
-function gettransaction(txid, includeWatchonly) {
+export function gettransaction(txid, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('gettransaction', function(err, data){
       if (err) return reject(err);
@@ -132,7 +132,7 @@ function gettransaction(txid, includeWatchonly) {
 }
 
 
-function getunconfirmedbalance() {
+export function getunconfirmedbalance() {
   return new Promise((resolve, reject) => {
     client.cmd('getunconfirmedbalance', function(err, data){
       if (err) return reject(err);
@@ -141,7 +141,7 @@ function getunconfirmedbalance() {
   });
 }
 
-function getwalletinfo() {
+export function getwalletinfo() {
   return new Promise((resolve, reject) => {
     client.cmd('getwalletinfo', function(err, data){
       if (err) return reject(err);
@@ -150,7 +150,7 @@ function getwalletinfo() {
   });
 }
 
-function importaddress(address, label, rescan, p2sh) {
+export function importaddress(address, label, rescan, p2sh) {
   return new Promise((resolve, reject) => {
     client.cmd('importaddress', function(err, data){
       if (err) return reject(err);
@@ -159,7 +159,7 @@ function importaddress(address, label, rescan, p2sh) {
   });
 }
 
-function importprivkey(privkey, label, rescan) {
+export function importprivkey(privkey, label, rescan) {
   return new Promise((resolve, reject) => {
     client.cmd('importprivkey', function(err, data){
       if (err) return reject(err);
@@ -168,7 +168,7 @@ function importprivkey(privkey, label, rescan) {
   });
 }
 
-function importprunedfunds() {
+export function importprunedfunds() {
   return new Promise((resolve, reject) => {
     client.cmd('importprunedfunds', function(err, data){
       if (err) return reject(err);
@@ -177,7 +177,7 @@ function importprunedfunds() {
   });
 }
 
-function importpubkey(pubkey, label, rescan) {
+export function importpubkey(pubkey, label, rescan) {
   return new Promise((resolve, reject) => {
     client.cmd('importpubkey', function(err, data){
       if (err) return reject(err);
@@ -186,7 +186,7 @@ function importpubkey(pubkey, label, rescan) {
   });
 }
 
-function importwallet(filename) {
+export function importwallet(filename) {
   return new Promise((resolve, reject) => {
     client.cmd('importwallet', function(err, data){
       if (err) return reject(err);
@@ -195,7 +195,7 @@ function importwallet(filename) {
   });
 }
 
-function keypoolrefill(newsize) {
+export function keypoolrefill(newsize) {
   return new Promise((resolve, reject) => {
     client.cmd('keypoolrefill', function(err, data){
       if (err) return reject(err);
@@ -204,7 +204,7 @@ function keypoolrefill(newsize) {
   });
 }
 
-function listaccounts(minconf, includeWatchonly) {
+export function listaccounts(minconf, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('listaccounts', function(err, data){
       if (err) return reject(err);
@@ -213,7 +213,7 @@ function listaccounts(minconf, includeWatchonly) {
   });
 }
 
-function listaddressgroupings() {
+export function listaddressgroupings() {
   return new Promise((resolve, reject) => {
     client.cmd('listaddressgroupings', function(err, data){
       if (err) return reject(err);
@@ -222,7 +222,7 @@ function listaddressgroupings() {
   });
 }
 
-function listlockunspent() {
+export function listlockunspent() {
   return new Promise((resolve, reject) => {
     client.cmd('listlockunspent', function(err, data){
       if (err) return reject(err);
@@ -231,7 +231,7 @@ function listlockunspent() {
   });
 }
 
-function listreceivedbyaccount(minconf, includeempty, includeWatchonly) {
+export function listreceivedbyaccount(minconf, includeempty, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('listreceivedbyaccount', function(err, data){
       if (err) return reject(err);
@@ -240,7 +240,7 @@ function listreceivedbyaccount(minconf, includeempty, includeWatchonly) {
   });
 }
 
-function listreceivedbyaddress(minconf, includeempty, includeWatchonly) {
+export function listreceivedbyaddress(minconf, includeempty, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('listreceivedbyaddress', function(err, data){
       if (err) return reject(err);
@@ -249,7 +249,7 @@ function listreceivedbyaddress(minconf, includeempty, includeWatchonly) {
   });
 }
 
-function listsinceblock(blockhash, targetConfirmations, includeWatchonly) {
+export function listsinceblock(blockhash, targetConfirmations, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('listsinceblock', function(err, data){
       if (err) return reject(err);
@@ -258,7 +258,7 @@ function listsinceblock(blockhash, targetConfirmations, includeWatchonly) {
   });
 }
 
-function listtransactions(account, count, from, includeWatchonly) {
+export function listtransactions(account, count, from, includeWatchonly) {
   return new Promise((resolve, reject) => {
     client.cmd('listtransactions', function(err, data){
       if (err) return reject(err);
@@ -267,7 +267,7 @@ function listtransactions(account, count, from, includeWatchonly) {
   });
 }
 
-function listunspent() {
+export function listunspent() {
   return new Promise((resolve, reject) => {
     client.cmd('listunspent', function(err, data){
       if (err) return reject(err);
@@ -276,7 +276,7 @@ function listunspent() {
   });
 }
 
-function lockunspent() {
+export function lockunspent() {
   return new Promise((resolve, reject) => {
     client.cmd('lockunspent', function(err, data){
       if (err) return reject(err);
@@ -285,7 +285,7 @@ function lockunspent() {
   });
 }
 
-function move(fromaccount, toaccount, amount, minconf, comment) {
+export function move(fromaccount, toaccount, amount, minconf, comment) {
   return new Promise((resolve, reject) => {
     client.cmd('move', function(err, data){
       if (err) return reject(err);
@@ -294,7 +294,7 @@ function move(fromaccount, toaccount, amount, minconf, comment) {
   });
 }
 
-function removeprunedfunds(txid) {
+export function removeprunedfunds(txid) {
   return new Promise((resolve, reject) => {
     client.cmd('removeprunedfunds', function(err, data){
       if (err) return reject(err);
@@ -303,7 +303,7 @@ function removeprunedfunds(txid) {
   });
 }
 
-function reservebalance(reserve, amount) {
+export function reservebalance(reserve, amount) {
   return new Promise((resolve, reject) => {
     client.cmd('reservebalance', function(err, data){
       if (err) return reject(err);
@@ -312,7 +312,7 @@ function reservebalance(reserve, amount) {
   });
 }
 
-function sendfrom(fromAccount, toAddress, amount, minconf, comment, commentTo) {
+export function sendfrom(fromAccount, toAddress, amount, minconf, comment, commentTo) {
   return new Promise((resolve, reject) => {
     client.cmd('sendfrom', function(err, data){
       if (err) return reject(err);
@@ -321,7 +321,7 @@ function sendfrom(fromAccount, toAddress, amount, minconf, comment, commentTo) {
   });
 }
 
-function sendmany(fromaccount, address, amount, minconf, comment, address) {
+export function sendmany(fromaccount, address, amount, minconf, comment) {
   return new Promise((resolve, reject) => {
     client.cmd('sendmany', function(err, data){
       if (err) return reject(err);
@@ -330,7 +330,7 @@ function sendmany(fromaccount, address, amount, minconf, comment, address) {
   });
 }
 
-function sendtoaddress(address, amount, comment, commentTo, subtractfeefromamount) {
+export function sendtoaddress(address, amount, comment, commentTo, subtractfeefromamount) {
   return new Promise((resolve, reject) => {
     client.cmd('sendtoaddress', function(err, data){
       if (err) return reject(err);
@@ -339,7 +339,7 @@ function sendtoaddress(address, amount, comment, commentTo, subtractfeefromamoun
   });
 }
 
-function setaccount(address, account) {
+export function setaccount(address, account) {
   return new Promise((resolve, reject) => {
     client.cmd('setaccount', function(err, data){
       if (err) return reject(err);
@@ -348,7 +348,7 @@ function setaccount(address, account) {
   });
 }
 
-function settxfee(amount) {
+export function settxfee(amount) {
   return new Promise((resolve, reject) => {
     client.cmd('settxfee', function(err, data){
       if (err) return reject(err);
@@ -357,7 +357,7 @@ function settxfee(amount) {
   });
 }
 
-function signmessage(blackcoinaddress, message) {
+export function signmessage(blackcoinaddress, message) {
   return new Promise((resolve, reject) => {
     client.cmd('signmessage', function(err, data){
       if (err) return reject(err);
@@ -366,7 +366,7 @@ function signmessage(blackcoinaddress, message) {
   });
 }
 
-function walletlock() {
+export function walletlock() {
   return new Promise((resolve, reject) => {
     client.cmd('walletlock', function(err, data){
       if (err) return reject(err);
@@ -375,7 +375,7 @@ function walletlock() {
   });
 }
 
-function walletpassphrase(passphrase, timeout, stakingonly) {
+export function walletpassphrase(passphrase, timeout, stakingonly) {
   return new Promise((resolve, reject) => {
     client.cmd(`walletpassphrase ${passphrase} ${timeout} ${stakingonly}`, function(err, data){
       if (err) return reject(err);
@@ -384,7 +384,7 @@ function walletpassphrase(passphrase, timeout, stakingonly) {
   });
 }
 
-function walletpassphrasechange(walletpassphrasechange, oldpassphrase, newpassphrase) {
+export function walletpassphrasechange(walletpassphrasechange, oldpassphrase, newpassphrase) {
   return new Promise((resolve, reject) => {
     client.cmd('walletpassphrasechange', function(err, data){
       if (err) return reject(err);
@@ -393,49 +393,47 @@ function walletpassphrasechange(walletpassphrasechange, oldpassphrase, newpassph
   });
 }
 
-module.exports = (function(){
-  return {
-    abandontransaction,
-    abortrescan,
-    addmultisigaddress,
-    backupwallet,
-    burn,
-    dumpprivkey,
-    dumpwallet,
-    getbalance,
-    getnewaddress,
-    getrawchangeaddress,
-    getreceivedbyaccount,
-    getreceivedbyaddress,
-    gettransaction,
-    getunconfirmedbalance,
-    getwalletinfo,
-    importaddress,
-    importprivkey,
-    importprunedfunds,
-    importpubkey,
-    importwallet,
-    keypoolrefill,
-    listaccounts,
-    listaddressgroupings,
-    listlockunspent,
-    listreceivedbyaccount,
-    listreceivedbyaddress,
-    listsinceblock,
-    listtransactions,
-    listunspent,
-    lockunspent,
-    move,
-    removeprunedfunds,
-    reservebalance,
-    sendfrom,
-    sendmany,
-    sendtoaddress,
-    setaccount,
-    settxfee,
-    signmessage,
-    walletlock,
-    walletpassphrase,
-    walletpassphrasechange,
-  }
-})();
+/*export {
+  abandontransaction,
+  abortrescan,
+  addmultisigaddress,
+  backupwallet,
+  burn,
+  dumpprivkey,
+  dumpwallet,
+  getbalance,
+  getnewaddress,
+  getrawchangeaddress,
+  getreceivedbyaccount,
+  getreceivedbyaddress,
+  gettransaction,
+  getunconfirmedbalance,
+  getwalletinfo,
+  importaddress,
+  importprivkey,
+  importprunedfunds,
+  importpubkey,
+  importwallet,
+  keypoolrefill,
+  listaccounts,
+  listaddressgroupings,
+  listlockunspent,
+  listreceivedbyaccount,
+  listreceivedbyaddress,
+  listsinceblock,
+  listtransactions,
+  listunspent,
+  lockunspent,
+  move,
+  removeprunedfunds,
+  reservebalance,
+  sendfrom,
+  sendmany,
+  sendtoaddress,
+  setaccount,
+  settxfee,
+  signmessage,
+  walletlock,
+  walletpassphrase,
+  walletpassphrasechange,
+}*/

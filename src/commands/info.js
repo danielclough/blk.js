@@ -1,7 +1,7 @@
-const {getwalletinfo} = require('../depends/blackcoin-wallet')
-const {getstakinginfo} = require('../depends/blackcoin-mining')
-const {getinfo} = require('../depends/blackcoin-control')
-const {getnetworkinfo} = require('../depends/blackcoin-network')
+import { getwalletinfo } from '../depends/blackcoin-wallet.js'
+import { getstakinginfo } from '../depends/blackcoin-mining.js'
+import { getinfo } from '../depends/blackcoin-control.js'
+import { getnetworkinfo } from '../depends/blackcoin-network.js'
 
 async function info() {
 	let walletInfo = await getwalletinfo().catch(err => {

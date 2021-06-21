@@ -1,7 +1,7 @@
 import blackcoin from 'node-blackcoin-more'
-import config from './blackcoin-config.js'
+import config from '../../config.js'
 
-function warn() {
+export function warn() {
   if (!config.user || !config.pass || !config.host || !config.port) {
     console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
     console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
@@ -12,7 +12,7 @@ warn()
 
 const client = new blackcoin.Client(config);
 
-function createrawtransaction(utxos, output) {
+export function createrawtransaction(utxos, output) {
   return new Promise((resolve, reject) => {
     client.cmd('createrawtransaction', utxos, output, function(err, data){
       if (err) return reject(err);
@@ -21,7 +21,7 @@ function createrawtransaction(utxos, output) {
   });
 }
 
-function decoderawtransaction(raw) {
+export function decoderawtransaction(raw) {
   return new Promise((resolve, reject) => {
     client.cmd('decoderawtransaction', raw, function(err, data){
       if (err) return reject(err);
@@ -30,7 +30,7 @@ function decoderawtransaction(raw) {
   });
 }
 
-function decodescript(raw) {
+export function decodescript(raw) {
   return new Promise((resolve, reject) => {
     client.cmd('decodescript', function(err, data){
       if (err) return reject(err);
@@ -39,7 +39,7 @@ function decodescript(raw) {
   });
 }
 
-function fundrawtransaction(raw, options) {
+export function fundrawtransaction(raw, options) {
   return new Promise((resolve, reject) => {
     client.cmd('fundrawtransaction', raw, function(err, data){
       if (err) return reject(err);
@@ -48,7 +48,7 @@ function fundrawtransaction(raw, options) {
   });
 }
 
-function getnormalizedtxid(raw) {
+export function getnormalizedtxid(raw) {
   return new Promise((resolve, reject) => {
     client.cmd('getnormalizedtxid', raw, function(err, data){
       if (err) return reject(err);
@@ -57,7 +57,7 @@ function getnormalizedtxid(raw) {
   });
 }
 
-function getrawtransaction(txid, verbose) {
+export function getrawtransaction(txid, verbose) {
   return new Promise((resolve, reject) => {
     client.cmd('getrawtransaction', function(err, data){
       if (err) return reject(err);
@@ -66,7 +66,7 @@ function getrawtransaction(txid, verbose) {
   });
 }
 
-function sendrawtransaction(raw) {
+export function sendrawtransaction(raw) {
   return new Promise((resolve, reject) => {
     client.cmd('sendrawtransaction', raw, function(err, data){
       if (err) return reject(err);
@@ -75,7 +75,7 @@ function sendrawtransaction(raw) {
   });
 }
 
-function signrawtransaction(raw) {
+export function signrawtransaction(raw) {
   return new Promise((resolve, reject) => {
     client.cmd('signrawtransaction', raw, function(err, data){
       if (err) return reject(err);

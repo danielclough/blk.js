@@ -1,7 +1,7 @@
 import blackcoin from 'node-blackcoin-more'
-import config from './blackcoin-config.js'
+import config from '../../config.js'
 
-function warn() {
+export function warn() {
   if (!config.user || !config.pass || !config.host || !config.port) {
     console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
     console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
@@ -11,7 +11,7 @@ function warn() {
 warn()
 
 const client = new blackcoin.Client(config);
-function addnode(node, arg) {
+export function addnode(node, arg) {
   return new Promise((resolve, reject) => {
     client.cmd('addnode', function(err, data){
       if (err) return reject(err);
@@ -20,7 +20,7 @@ function addnode(node, arg) {
   });
 }
 
-function clearbanned() {
+export function clearbanned() {
   return new Promise((resolve, reject) => {
     client.cmd('clearbanned', function(err, data){
       if (err) return reject(err);
@@ -29,7 +29,7 @@ function clearbanned() {
   });
 }
 
-function disconnectnode(node) {
+export function disconnectnode(node) {
   return new Promise((resolve, reject) => {
     client.cmd('disconnectnode', function(err, data){
       if (err) return reject(err);
@@ -38,7 +38,7 @@ function disconnectnode(node) {
   });
 }
 
-function getaddednodeinfo(dummy, node) {
+export function getaddednodeinfo(dummy, node) {
   return new Promise((resolve, reject) => {
     client.cmd('getaddednodeinfo', function(err, data){
       if (err) return reject(err);
@@ -47,7 +47,7 @@ function getaddednodeinfo(dummy, node) {
   });
 }
 
-function getconnectioncount() {
+export function getconnectioncount() {
   return new Promise((resolve, reject) => {
     client.cmd('getconnectioncount', function(err, data){
       if (err) return reject(err);
@@ -56,7 +56,7 @@ function getconnectioncount() {
   });
 }
 
-function getnettotals() {
+export function getnettotals() {
   return new Promise((resolve, reject) => {
     client.cmd('getnettotals', function(err, data){
       if (err) return reject(err);
@@ -65,7 +65,7 @@ function getnettotals() {
   });
 }
 
-function getnetworkinfo() {
+export function getnetworkinfo() {
   return new Promise((resolve, reject) => {
     client.cmd('getnetworkinfo', function(err, data){
       if (err) return reject(err);
@@ -74,7 +74,7 @@ function getnetworkinfo() {
   });
 }
 
-function getpeerinfo() {
+export function getpeerinfo() {
   return new Promise((resolve, reject) => {
     client.cmd('getpeerinfo', function(err, data){
       if (err) return reject(err);
@@ -83,7 +83,7 @@ function getpeerinfo() {
   });
 }
 
-function listbanned() {
+export function listbanned() {
   return new Promise((resolve, reject) => {
     client.cmd('listbanned', function(err, data){
       if (err) return reject(err);
@@ -92,7 +92,7 @@ function listbanned() {
   });
 }
 
-function ping() {
+export function ping() {
   return new Promise((resolve, reject) => {
     client.cmd('ping', function(err, data){
       if (err) return reject(err);

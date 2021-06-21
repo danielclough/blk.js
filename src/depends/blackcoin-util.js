@@ -1,5 +1,5 @@
 import blackcoin from 'node-blackcoin-more'
-import config from './blackcoin-config.js'
+import config from '../../config.js'
 
 function warn() {
   if (!config.user || !config.pass || !config.host || !config.port) {

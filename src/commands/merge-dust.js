@@ -4,10 +4,10 @@ import {
   decoderawtransaction,
   sendrawtransaction,
   signrawtransaction,
-} from '../depends/blackcoin-rawtx'
+} from '../depends/blackcoin-rawtx.js'
 import {
   listunspent,
-} from '../depends/blackcoin-wallet'
+} from '../depends/blackcoin-wallet.js'
 
 async function mergeDust() {
   let dustAmount;
