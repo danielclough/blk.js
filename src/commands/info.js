@@ -2,26 +2,36 @@ const {getwalletinfo} = require('../depends/blackcoin-wallet')
 const {getstakinginfo} = require('../depends/blackcoin-mining')
 const {getinfo} = require('../depends/blackcoin-control')
 const {getnetworkinfo} = require('../depends/blackcoin-network')
+const {getblockchaininfo} = require('../depends/blackcoin-blockchain')
 
-async function info() {
-	let walletInfo = await getwalletinfo().catch(err => {
-		console.log('getwalletinfo', err)
-	    process.exit(0)
-	});
+async function info(arg) {
+	try {
+		wallet = await getwalletinfo()
+		staking = await getstakinginfo()
+		info = await getinfo()
+		network = await getnetworkinfo()
+		blockchain = await getblockchaininfo()
+		
+		console.log(`
+		Client Overview:
+			balance: ${wallet.balance}
+			staked_balance: ${wallet.staked_balance}
+			txcount: ${wallet.txcount}
+			unconfirmed_balance: ${wallet.unconfirmed_balance}
+			immature_balance: ${wallet.immature_balance}
+			total_balance: ${wallet.total_balance}
 
-	let stakingInfo = await getstakinginfo().catch(err => {
-		console.log('getstakinginfo', err)
-	    process.exit(0)
-	});
-
-	let info = await getinfo().catch(err => {
-		console.log('getinfo', err)
-	    process.exit(0)
-	});
-
-	let networkInfo = await getnetworkinfo().catch(err => {
-		console.log('getnetworkinfo', err)
-	    process.exit(0)
-	});
+			subversion: ${network.subversion}
+			connections: ${network.connections}
+			blocks: ${info.blocks}
+			enabled: ${staking.enabled}
+			staking: ${staking.staking}
+			netstakeweight: ${staking.netstakeweight}
+			expectedtime: ${staking.expectedtime}
+			bestblockhash: ${blockchain.bestblockhash}
+		`)
+	} catch (e) {
+	    console.log(e)
+	}
 }
-info().catch(err => console.log(err));
+info()

@@ -3,7 +3,6 @@
   "version": "0.0.6",
   "description": "Blackcoin Command Line Utility",
   "main": "index.js",
-  "type": "module",
   "bin": {
     "blk": "index.js"
   },

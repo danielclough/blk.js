@@ -3,28 +3,28 @@ const inquirer = require('inquirer');
 const {walletpassphrase} = require('../depends/blackcoin-wallet')
 
 async function unlock() {
-  let timeout = 9999999 
+  let timeout = 9999999 // hard coded in blackcoin-wallet.js for now
   let stakingonly
   let passphrase 
 
   passphrase = await inquirer.prompt([
     {
       name: 'passphrase',
+      type: 'password',
       message: `What is your passphrase?`,
     },
   ]);
 
   stakingonly = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'confirm',
       name: 'stakingonly',
       message: `Unlock for staking only?`,
-      choices: ['true', 'false'],
-      default: 'true'
+      default: true
     },
   ]);
 
-  walletpassphrase(passphrase, timeout, stakingonly)
+  walletpassphrase(passphrase, stakingonly)
   walletpassphrase().catch(err => console.log(err));
 }
 unlock().catch(err => console.log(err));

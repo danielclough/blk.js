@@ -1,17 +1,9 @@
 const blackcoin = require("node-blackcoin-more");
 const config = require('./blackcoin-config.js');
 
-function warn() {
-  if (!config.user || !config.pass || !config.host || !config.port) {
-    console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
-    console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
-    process.exit(0);
-  }
-}
-warn()
+config.warn()
 
 const client = new blackcoin.Client(config);
-
 
 function getstakinginfo() {
   return new Promise((resolve, reject) => {
@@ -39,3 +31,11 @@ function generatetoaddress(numblocks, address, maxtries) {
     });
   });
 }
+
+module.exports = (function(){
+  return {
+    getstakinginfo,
+    generate,
+    generatetoaddress
+  }
+})();

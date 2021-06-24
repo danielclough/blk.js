@@ -34,7 +34,7 @@ async function config() {
     {
       name: 'port',
       message: `What is your rpc port?`,
-      default: 15715
+      default: 8334
     },
   ]);
 }

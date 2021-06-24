@@ -1,14 +1,7 @@
 const blackcoin = require("node-blackcoin-more");
 const config = require('./blackcoin-config.js');
 
-function warn() {
-  if (!config.user || !config.pass || !config.host || !config.port) {
-    console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
-    console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
-    process.exit(0);
-  }
-}
-warn()
+config.warn()
 
 const client = new blackcoin.Client(config);
 
@@ -50,7 +43,7 @@ function estimatesmartfee(nblocks) {
 
 function estimatesmartpriority(nblocks) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', estimatesmartpriority(err, data){
+    client.cmd('abortrescan', estimatesmartpriority, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -59,7 +52,7 @@ function estimatesmartpriority(nblocks) {
 
 function signmessagewithprivkey(privkey, message) {
   return new Promise((resolve, reject) => {
-    client.cmd('abortrescan', signmessagewithprivkey(err, data){
+    client.cmd('abortrescan', signmessagewithprivkey, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -75,11 +68,25 @@ function validateaddress(bitcoinaddress) {
   });
 }
 
-function verifymessage(blackcoinaddress, signature, message) {
+function verifymessage(obj) {
   return new Promise((resolve, reject) => {
-    client.cmd('verifymessage', function(err, data){
+    client.cmd('verifymessage', obj.args[0], obj.args[1], obj.args[2], function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
   });
 }
+
+
+module.exports = (function(){
+  return {
+    createmultisig,
+    estimatefee,
+    estimatepriority,
+    estimatesmartfee,
+    estimatesmartpriority,
+    signmessagewithprivkey,
+    validateaddress,
+    verifymessage,
+  }
+})();

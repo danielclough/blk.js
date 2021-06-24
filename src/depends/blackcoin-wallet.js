@@ -1,20 +1,13 @@
 const blackcoin = require("node-blackcoin-more");
 const config = require('./blackcoin-config.js');
 
-function warn() {
-  if (!config.user || !config.pass || !config.host || !config.port) {
-    console.log(`depends/blackcoin-config.js requires host, port, user and pass.`);
-    console.log(`user: ${config.user}, pass: ${config.pass}, host: ${config.host}, port: ${config.port}`)
-    process.exit(0);
-  }
-}
-warn()
+config.warn()
 
 const client = new blackcoin.Client(config);
 
 function abandontransaction(txid) {
   return new Promise((resolve, reject) => {
-    client.cmd('abandontransaction', txid, function(err, data){
+    client.cmd('abandontransaction, txid', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -32,7 +25,7 @@ function abortrescan() {
 
 function addmultisigaddress(nrequired, key, account, address_type) {
   return new Promise((resolve, reject) => {
-    client.cmd('addmultisigaddress', nrequired, key, account, address_type, function(err, data){
+    client.cmd('addmultisigaddress, nrequired, key, account, address_type', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -42,7 +35,7 @@ function addmultisigaddress(nrequired, key, account, address_type) {
 
 function backupwallet(destination) {
   return new Promise((resolve, reject) => {
-    client.cmd('backupwallet', destination, function(err, data){
+    client.cmd('backupwallet, destination', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -70,6 +63,15 @@ function dumpprivkey(address) {
 function dumpwallet(filename) {
   return new Promise((resolve, reject) => {
     client.cmd('dumpwallet', function(err, data){
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+function encryptwallet(passphrase) {
+  return new Promise((resolve, reject) => {
+    client.cmd('encryptwallet', passphrase, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -106,7 +108,7 @@ function getrawchangeaddress() {
 
 function getreceivedbyaccount(account, minconf) {
   return new Promise((resolve, reject) => {
-    client.cmd('getreceivedbyaccount', minconf, function(err, data){
+    client.cmd('getreceivedbyaccount, minconf', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -115,7 +117,7 @@ function getreceivedbyaccount(account, minconf) {
 
 function getreceivedbyaddress(address, minconf) {
   return new Promise((resolve, reject) => {
-    client.cmd('getreceivedbyaddress', minconf, function(err, data){
+    client.cmd('getreceivedbyaddress, minconf', function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -359,7 +361,7 @@ function settxfee(amount) {
 
 function signmessage(blackcoinaddress, message) {
   return new Promise((resolve, reject) => {
-    client.cmd('signmessage', function(err, data){
+    client.cmd('signmessage', blackcoinaddress.args[0], message[1], function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -375,9 +377,9 @@ function walletlock() {
   });
 }
 
-function walletpassphrase(passphrase, timeout, stakingonly) {
+function walletpassphrase(passphrase, stakingonly) {
   return new Promise((resolve, reject) => {
-    client.cmd(`walletpassphrase ${passphrase} ${timeout} ${stakingonly}`, function(err, data){
+    client.cmd('walletpassphrase', "${passphrase}", 9999999, !!stakingonly, function(err, data){
       if (err) return reject(err);
       resolve(data);
     });
@@ -402,6 +404,7 @@ module.exports = (function(){
     burn,
     dumpprivkey,
     dumpwallet,
+    encryptwallet,
     getbalance,
     getnewaddress,
     getrawchangeaddress,

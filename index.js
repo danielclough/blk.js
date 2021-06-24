@@ -10,7 +10,6 @@ blk
 		const info = require('./src/commands/info.js')
 	});
 
-
 blk
 	.command('send-address [from] [to]')
 	.option('--to', 'to address')
@@ -31,6 +30,26 @@ blk
 	.description('Unlock Wallet')
 	.action(() => {
 		const unlock = require('./src/commands/unlock.js')
+	});
+
+blk
+	.command('signmessage')
+	.action((address, message) => {
+		const signmessage = require('./src/commands/signmessage.js')
+		signmessage(address, message)
+	});
+
+blk
+	.command('verifymessage')
+	.action((address, signature, message) => {
+		const verifymessage = require('./src/commands/verifymessage.js')
+		verifymessage(address, signature, message)
+	});
+
+blk
+	.command('encryptwallet')
+	.action((passphrase) => {
+		const encryptwallet = require('./src/commands/encryptwallet.js')
 	});
 
 
