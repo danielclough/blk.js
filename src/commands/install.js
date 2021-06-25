@@ -66,6 +66,13 @@ const install = async () => {
 
   // build Dockerfiles
   const moreBuilder = `${__dirname}/install/moreBuilder/`
+  // check that the directory exists
+  fs.exists((moreBuilder), exists => {
+    console.log(exists ? "" 
+                      : fs.mkdirSync((moreBuilder)));
+  });
+  
+
   // ubase
   const ubaseDockerfile = require(`${__dirname}/install/ubase.js`)
   const ubaseDockerfileName = `${moreBuilder}Dockerfile.ubase-${SYSTYPE}-${branch.branch}`
