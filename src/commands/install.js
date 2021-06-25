@@ -65,11 +65,11 @@ const install = async () => {
   const SYSTYPE = shell.exec("echo -n $(lscpu | head -1 | tr -s ' ' | cut -d ' ' -f2)");
 
   // build Dockerfiles
-  const moreBuilder = `${__dirname}/install/moreBuilder/`
+  const moreBuilder = `/home/${process.env.USER}/BlackcoinMoreBuilder/`
   // check that the directory exists
   fs.exists((moreBuilder), exists => {
     console.log(exists ? "" 
-                      : fs.mkdirSync((moreBuilder)));
+                      : fs.mkdirSync(moreBuilder));
   });
   
 
