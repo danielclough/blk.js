@@ -4,6 +4,13 @@ const blk = require('commander')
 const version = pjson.version
 
 blk
+	.command('install')
+	.action(() => {
+		const install = require('./src/commands/install.js')
+		install()
+	});
+
+blk
 	.command('info')
 	.option('-d, --debug', 'output extra debugging')
 	.action(() => {
