@@ -1,5 +1,5 @@
 const blackcoin = require("node-blackcoin-more");
-const  config = require('./config.js');
+const config = require('./config.js');
 
 config.warn()
 

@@ -97,6 +97,9 @@ const install = async () => {
                                           then execute:
                               bash ${buildDockerName}
 
+      Then start docker with 
+  docker run -itd  -v /home/${process.env.USER}/.blackmore-docker:/.blackmore --network=host --name=blackmore ${DockerHub:DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch} blackmored
+
     `)
   // enable autobuild
   // const child_process = require('child_process');

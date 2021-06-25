@@ -1,5 +1,5 @@
 const blackcoin = require('node-blackcoin-more');
-require('dotenv').config()
+require('dotenv').config();
 
 const config = {
 	"user": process.env.RPCUSER,
@@ -7,7 +7,7 @@ const config = {
 	"host": process.env.HOST,
 	"port": process.env.PORT,
 	warn() {
-	  if (!this.user || !this.pass || !this.host || !this.port) {
+	  if (!process.env.RPCUSER || !process.env.RPCPASSWORD || !process.env.HOST || !process.env.PORT) {
 	    console.log(`.env requires host, port, rpcuser and rpcpassword.`);
 	    process.exit(0);
 	  }

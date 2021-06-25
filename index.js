@@ -2,12 +2,19 @@
 const pjson = require('./package.json');
 const blk = require('commander')
 const version = pjson.version
+const rootDir = __dirname
 
 blk
 	.command('install')
 	.action(() => {
 		const install = require('./src/commands/install.js')
 		install()
+	});
+
+blk
+	.command('config')
+	.action((rootDir) => {
+		const config = require('./src/commands/config.js')
 	});
 
 blk
