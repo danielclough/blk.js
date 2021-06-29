@@ -2,8 +2,17 @@
 const pjson = require('./package.json');
 const blk = require('commander')
 const version = pjson.version
-const rootDir = __dirname
+const rootDir = __dirname;
+const config = require('./src/depends/config.js');
 
+const test = async () => {
+	if (!config.user || !config.pass || !config.host || !config.port) {
+		config.user = await config.getUser()
+		config.pass = await config.getPass()
+		config.host = await config.getHost()
+		config.port = await config.getPort()
+	}
+}
 blk
 	.command('install')
 	.action(() => {
@@ -15,6 +24,7 @@ blk
 	.command('info')
 	.option('-d, --debug', 'output extra debugging')
 	.action(async () => {
+		await test()
 		const info = require('./src/commands/info.js')
 	});
 

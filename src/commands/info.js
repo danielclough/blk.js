@@ -1,4 +1,3 @@
-const config = require('../depends/config.js');
 const {getwalletinfo} = require('../depends/blackcoin-wallet')
 const {getstakinginfo} = require('../depends/blackcoin-mining')
 const {getinfo} = require('../depends/blackcoin-control')
@@ -7,15 +6,7 @@ const {getblockchaininfo} = require('../depends/blackcoin-blockchain')
 
 async function info(arg) {
 	try {
-	  if (!config.user || !config.pass || !config.host || !config.port) {
-	  	config.user = await config.getUser()
-	  	config.pass = await config.getPass()
-	  	config.host = await config.getHost()
-	  	config.port = await config.getPort()
 	  	getInfo()
-	  } else {
-	  	getInfo()
-	  }
 	} catch (e) {
 	    console.log(e)
 	}
