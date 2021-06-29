@@ -32,41 +32,47 @@ blk
 	.command('send-address [from] [to]')
 	.option('--to', 'to address')
 	.option('--from', 'from address')
-	.action((to, from) => {
+	.action(async (to, from) => {
+		await test()
 		const sendAddress = require('./src/commands/send-address.js')
 	});
 
 blk
 	.command('merge-dust')
 	.option('-i, --interactive', 'Interactive Mode', 'interactive')
-	.action((interactive) => {
+	.action(async (interactive) => {
+		await test()
 		const mergeDust = require('./src/commands/merge-dust.js')
 	});
 
 blk
 	.command('unlock')
 	.description('Unlock Wallet')
-	.action(() => {
+	.action(async () => {
+		await test()
 		const unlock = require('./src/commands/unlock.js')
 	});
 
 blk
 	.command('signmessage')
-	.action((address, message) => {
+	.action(async (address, message) => {
+		await test()
 		const signmessage = require('./src/commands/signmessage.js')
 		signmessage(address, message)
 	});
 
 blk
 	.command('verifymessage')
-	.action((address, signature, message) => {
+	.action(async (address, signature, message) => {
+		await test()
 		const verifymessage = require('./src/commands/verifymessage.js')
 		verifymessage(address, signature, message)
 	});
 
 blk
 	.command('encryptwallet')
-	.action((passphrase) => {
+	.action(async (passphrase) => {
+		await test()
 		const encryptwallet = require('./src/commands/encryptwallet.js')
 	});
 
@@ -96,7 +102,7 @@ const cryptoidWords = `
 blk
 	.command('cryptoid <query>')
 	.description(cryptoidWords)
-	.action((query, secondArgument) => {
+	.action(async (query, secondArgument) => {
 		const cryptoid = require('./src/commands/cryptoid.js')
 		cryptoid(query, secondArgument);
 	});

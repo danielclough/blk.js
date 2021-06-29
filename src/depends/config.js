@@ -3,18 +3,13 @@ require('dotenv').config();
 const inquirer = require('inquirer');
 const shell = require('shelljs');
 
-let user
-let pass
-let host
-let port
-
 const config = {
 	async getUser() {
 		user = await inquirer.prompt([
 		    {
 		      name: 'user',
 		      message: `What is your rpc user?`,
-		      default: 'daniel'
+		      default: process.env.USER
 		    },
 		]);
 		return user.user
