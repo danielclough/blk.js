@@ -1,6 +1,6 @@
 {
   "name": "blk.js",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Blackcoin Command Line Utility",
   "main": "index.js",
   "bin": {
@@ -15,7 +15,6 @@
     "node-blackcoin-more": "^2.13.0",
     "shelljs": "^0.8.4"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
