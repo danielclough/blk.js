@@ -12,15 +12,9 @@ blk
 	});
 
 blk
-	.command('config')
-	.action((rootDir) => {
-		const config = require('./src/commands/config.js')
-	});
-
-blk
 	.command('info')
 	.option('-d, --debug', 'output extra debugging')
-	.action(() => {
+	.action(async () => {
 		const info = require('./src/commands/info.js')
 	});
 

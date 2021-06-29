@@ -1,8 +1,6 @@
 const blackcoin = require("node-blackcoin-more");
 const config = require('./config.js');
 
-config.warn()
-
 const client = new blackcoin.Client(config);
 
 function abandontransaction(txid) {
