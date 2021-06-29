@@ -11,6 +11,17 @@ const test = async () => {
 		config.pass = await config.getPass()
 		config.host = await config.getHost()
 		config.port = await config.getPort()
+		console.log(`
+			Copy/Paste this into your shell:
+				
+cat << EOF > ${config.dotenvfile}
+RPCUSER=${config.user}
+RPCPASSWORD=${config.pass}
+HOST=${config.host}
+PORT=${config.port}
+EOF
+			`)
+		process.exit(0)
 	}
 }
 blk

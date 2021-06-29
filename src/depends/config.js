@@ -1,7 +1,7 @@
 const blackcoin = require('node-blackcoin-more');
-require('dotenv').config();
+let dotenvfile = __dirname + '/.env'
+require('dotenv').config({path: dotenvfile});
 const inquirer = require('inquirer');
-const shell = require('shelljs');
 
 const config = {
 	async getUser() {
@@ -45,10 +45,11 @@ const config = {
 		]);
 		return port.port
 	},
-	"user": (process.env.RPCUSER || this.getUser),
-	"pass": (process.env.RPCPASSWORD || this.getPass),
-	"host": (process.env.HOST || this.getHost),
-	"port": (process.env.PORT || this.getPort),
+	"dotenvfile": dotenvfile, 
+	"user": process.env.RPCUSER || this.getUser,
+	"pass": process.env.RPCPASSWORD || this.getPass,
+	"host": process.env.HOST || this.getHost,
+	"port": process.env.PORT || this.getPort
 }
 
 module.exports = config
