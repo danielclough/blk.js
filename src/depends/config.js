@@ -19,8 +19,7 @@ const config = {
 		    {
 		      name: 'pass',
 		      type: 'password',
-		      message: `What is your rpc password?`,
-		      default: 'j77GUjKaca0vTgwA'
+		      message: `What is your rpc password?`
 		    },
 		]);
 		return pass.pass
@@ -46,10 +45,10 @@ const config = {
 		return port.port
 	},
 	"dotenvfile": dotenvfile, 
-	"user": process.env.RPCUSER || this.getUser,
-	"pass": process.env.RPCPASSWORD || this.getPass,
-	"host": process.env.HOST || this.getHost,
-	"port": process.env.PORT || this.getPort
+	"user": process.env.RPCUSER,
+	"pass": process.env.RPCPASSWORD,
+	"host": process.env.HOST,
+	"port": process.env.PORT
 }
 
 module.exports = config

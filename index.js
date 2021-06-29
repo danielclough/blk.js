@@ -12,7 +12,7 @@ const test = async () => {
 		config.host = await config.getHost()
 		config.port = await config.getPort()
 		console.log(`
-			Copy/Paste this into your shell:
+	Copy/paste this into your shell:
 				
 cat << EOF > ${config.dotenvfile}
 RPCUSER=${config.user}
@@ -20,6 +20,14 @@ RPCPASSWORD=${config.pass}
 HOST=${config.host}
 PORT=${config.port}
 EOF
+			
+mkdir ~/.blackmore-docker/
+cat << EOF >> ~/.blackmore-docker/blackmore.conf
+rpcuser=${config.user}
+rpcpassword=${config.pass}
+EOF
+
+blk install
 			`)
 		process.exit(0)
 	}
