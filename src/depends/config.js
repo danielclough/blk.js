@@ -1,6 +1,6 @@
 const blackcoin = require('node-blackcoin-more');
-let dotenvfile = __dirname + '/.env'
-require('dotenv').config({path: dotenvfile});
+let dotenvpath = __dirname + '/.env'
+require('dotenv').config({path: dotenvpath});
 const inquirer = require('inquirer');
 
 const config = {
@@ -44,7 +44,7 @@ const config = {
 		]);
 		return port.port
 	},
-	"dotenvfile": dotenvfile, 
+	"dotenvPath": dotenvpath, 
 	"user": process.env.RPCUSER,
 	"pass": process.env.RPCPASSWORD,
 	"host": process.env.HOST,

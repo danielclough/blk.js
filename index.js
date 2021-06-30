@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const pjson = require('./package.json');
 const blk = require('commander')
 const version = pjson.version
@@ -11,27 +12,20 @@ const test = async () => {
 		config.pass = await config.getPass()
 		config.host = await config.getHost()
 		config.port = await config.getPort()
-		console.log(`
-	Copy/paste this into your shell:
-				
-cat << EOF > ${config.dotenvfile}
-RPCUSER=${config.user}
+		dotenvFile = `RPCUSER=${config.user}
 RPCPASSWORD=${config.pass}
 HOST=${config.host}
-PORT=${config.port}
-EOF
-			
-mkdir ~/.blackmore-docker/
-cat << EOF >> ~/.blackmore-docker/blackmore.conf
-rpcuser=${config.user}
-rpcpassword=${config.pass}
-EOF
+PORT=${config.port}`
 
-blk install
-			`)
+		fs.exists((!config.dotenvPath), exists => {
+		  if (!exists) {
+		  	fs.writeFileSync( config.dotenvPath, dotenvFile);
+		  }
+		});
 		process.exit(0)
 	}
 }
+
 blk
 	.command('install')
 	.action(() => {
