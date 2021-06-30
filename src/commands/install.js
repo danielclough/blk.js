@@ -68,26 +68,31 @@ const install = async () => {
   const moreBuilder = `/home/${process.env.USER}/BlackcoinMoreBuilder/`
   // check that the directory exists
   fs.exists((moreBuilder), exists => {
-    console.log(exists ? "" 
-                      : fs.mkdirSync(moreBuilder));
+    if (!exists) {fs.mkdirSync(moreBuilder);}
   });
   
 
   // ubase
   const ubaseDockerfile = require(`${__dirname}/install/ubase.js`)
   const ubaseDockerfileName = `${moreBuilder}Dockerfile.ubase-${SYSTYPE}-${branch.branch}`
-  fs.writeFileSync( ubaseDockerfileName, ubaseDockerfile);
+  fs.exists((ubaseDockerfileName), exists => {
+    if (!exists) {fs.writeFileSync( ubaseDockerfileName, ubaseDockerfile);}
+  });
   // console.log(fs.readFileSync(ubaseDockerfileName, "utf8"));
   // ubuntu
   const ubuntuDockerfile = require(`${__dirname}/install/ubuntu.js`)
   const ubuntuDockerfileName = `${moreBuilder}Dockerfile.ubuntu-${SYSTYPE}-${branch.branch}`
-  fs.writeFileSync( ubuntuDockerfileName, ubuntuDockerfile);
+  fs.exists((ubuntuDockerfileName), exists => {
+    if (!exists) {fs.writeFileSync( ubuntuDockerfileName, ubuntuDockerfile);}
+  });
   // console.log(fs.readFileSync(ubuntuDockerfileName, "utf8"));
 
   // build
   const buildDocker = require(`${__dirname}/install/build.js`)
   const buildDockerName = `${moreBuilder}build.sh`
-  fs.writeFileSync( buildDockerName, buildDocker);
+  fs.exists((buildDockerName), exists => {
+    if (!exists) {fs.writeFileSync( buildDockerName, buildDocker);}
+  });
   // console.log(fs.readFileSync(buildDockerName, "utf8"));
 
   // examine files run yourself 
