@@ -35,22 +35,22 @@ const getInfo = async () => {
 	}).catch(err => {
 	  console.log(err)
 	})
-	usdTotal = (usd * total).toFixed(3)
+	usdTotal = (usd * total).toFixed(2)
 	eur = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=blackcoin&vs_currencies=eur").then(resp => {
 	    data = (resp.data["blackcoin"].eur).toFixed(3)
 	    return data
 	}).catch(err => {
 	  console.log(err)
 	})
-	eurTotal = (eur * total).toFixed(3)
+	eurTotal = (eur * total).toFixed(2)
 
-	hr = (min * 60).toFixed(2)
-	day = (hr * 24).toFixed(2)
-	month = (day * 30.5).toFixed(2)
-	year = (day * 365).toFixed(2)
+	hr = (min / 60).toFixed(2)
+	day = (hr / 24).toFixed(2)
+	month = (day / 30.5).toFixed(2)
+	year = (day / 365).toFixed(2)
 	annualEarnBTC = (year * 1.5 * btc).toFixed(8)
-	annualEarnUSD = (year * 1.5 * usd).toFixed(3)
-	annualEarnEUR = (year * 1.5 * eur).toFixed(3)
+	annualEarnUSD = (year * 1.5 * usd).toFixed(2)
+	annualEarnEUR = (year * 1.5 * eur).toFixed(2)
 	annualizedRewardRate = (( year * 1.5 ) / total * 100).toFixed(2)
 
 	console.log(`
