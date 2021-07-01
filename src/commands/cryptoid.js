@@ -21,7 +21,8 @@ cryptoid = function(query, secondArgument) {
 
 	}
 	axios.get(search).then(resp => {
-	    console.log(resp.data);
+	    data = resp.data
+	    return data
 	}).catch(err => {
 	  const log = chalk.red(err) // red for errors.
 	  console.log(log)
