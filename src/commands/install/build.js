@@ -1,5 +1,6 @@
 const shell = require('shelljs');
 const SYSTYPE = shell.exec("echo -n $(lscpu | head -1 | tr -s ' ' | cut -d ' ' -f2)");
+const config = require('../../depends/config.js');
 
 const buildDocker = `docker build -t ${DockerHub.DockerHub}/blackcoin-more-ubase-${SYSTYPE}:${branch.branch} - --network=host < /home/${process.env.USER}/BlackcoinMoreBuilder/Dockerfile.ubase-${SYSTYPE}-${branch.branch}
 # ubuntu (package with full ubuntu distro)
@@ -13,11 +14,17 @@ tar -C parts -c . | docker import - ${DockerHub.DockerHub}/blackcoin-more-minima
 docker image push ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch}
 docker container stop ubase
 
-echo sudo to create /home/${process.env.USER}/.blackmore/blackmore.conf as root
-sudo cat << EOF > /home/${process.env.USER}/.blackmore/blackmore.conf
-rpcuser=${process.env.USER}
-rpcpassword=${process.env.RPCPASSWORD}
-EOF
+if [[ -d ${/home/${process.env.USER}/.blackmore} ]]; then
+	echo '/home/${process.env.USER}/.blackmore exists, not creating /home/${process.env.USER}/.blackmore/blackmore.conf'
+else
+	echo sudo to create /home/${process.env.USER}/.blackmore/blackmore.conf as root
+	sudo mkdir /home/${process.env.USER}/.blackmore
+	sudo cat << EOF > /home/${process.env.USER}/.blackmore/blackmore.conf
+	rpcuser=${process.env.USER}
+	rpcpassword=${process.env.RPCPASSWORD}
+	EOF
+fi
+
 docker run -itd  -v /home/${process.env.USER}/.blackmore:/.blackmore --network=host --name=blackmore ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch} blackmored
 echo Install Complete
 `
