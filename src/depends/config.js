@@ -1,4 +1,3 @@
-const blackcoin = require('node-blackcoin-more');
 let dotenvpath = __dirname + '/.env'
 require('dotenv').config({path: dotenvpath});
 const inquirer = require('inquirer');

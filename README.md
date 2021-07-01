@@ -4,30 +4,26 @@ blk.js is a command line utility for blackcoin-more using the client's JSON-RPC 
 
 ## Install
 ```
+npm i -g blk.js
+```
+or, for development:
+```
 npm i blk.js
 cd blk.js
-cp example.env .env
-vim .env
 npm link
 ```
 ## Install Blackcoin-More with Docker
 
 `blk install`
 
-### development
-
-https://github.com/danielclough/blk.js/
-
-## Configuration
-
 ### Client Config
 
-blk.js/.env
+`.blackmore/blackmore.conf` must contain the same `rpcuser` and `rpcpassword` as your blk.js `.env` file.
+This requires root, so you need to add that manually.
+You can copy and pate the output during install.
 ```bash
-RPCUSER=
-RPCPASSWORD=
-HOST=localhost
-PORT=15715
+rpcuser=
+rpcpassword=
 ```
 
 #### SSL

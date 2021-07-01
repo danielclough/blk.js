@@ -11,6 +11,15 @@ docker cp ubase:/parts /home/${process.env.USER}/BlackcoinMoreBuilder
 cd /home/${process.env.USER}/BlackcoinMoreBuilder
 tar -C parts -c . | docker import - ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch}
 docker image push ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch}
-docker container stop ubase`
+docker container stop ubase
+
+echo sudo to create /home/${process.env.USER}/.blackmore/blackmore.conf as root
+sudo cat << EOF > /home/${process.env.USER}/.blackmore/blackmore.conf
+rpcuser=${process.env.USER}
+rpcpassword=${process.env.RPCPASSWORD}
+EOF
+docker run -itd  -v /home/${process.env.USER}/.blackmore:/.blackmore --network=host --name=blackmore ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch} blackmored
+echo Install Complete
+`
 
 module.exports = buildDocker

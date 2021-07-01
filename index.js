@@ -12,6 +12,7 @@ const test = async () => {
 		config.pass = await config.getPass()
 		config.host = await config.getHost()
 		config.port = await config.getPort()
+		
 		dotenvFile = `RPCUSER=${config.user}
 RPCPASSWORD=${config.pass}
 HOST=${config.host}
@@ -20,6 +21,8 @@ PORT=${config.port}`
 		fs.exists((!config.dotenvPath), exists => {
 		  if (!exists) {
 		  	fs.writeFileSync( config.dotenvPath, dotenvFile);
+		  	console.log(`.env file created: at ${config.dotenvPath}`)
+		  	console.log(fs.readFileSync(config.dotenvPath, "utf8"));
 		  }
 		});
 		process.exit(0)

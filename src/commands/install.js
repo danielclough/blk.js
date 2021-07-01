@@ -2,7 +2,6 @@ const fs = require('fs');
 const shell = require('shelljs');
 const inquirer = require('inquirer');
 
-
 // download latest Dockerfiles
 const ubase	= 'https://raw.githubusercontent.com/CoinBlack/blackcoin-more/add-jenkins/contrib/docker/Dockerfile.ubase'
 const ubuntu ='https://raw.githubusercontent.com/CoinBlack/blackcoin-more/add-jenkins/contrib/docker/Dockerfile.ubuntu'
@@ -99,12 +98,8 @@ const install = async () => {
   console.log(`
 
     Examine the files in ${moreBuilder} if you like, 
-                                          then execute:
-                              bash ${buildDockerName}
-
-      Then start docker with 
-  docker run -itd  -v /home/${process.env.USER}/.blackmore-docker:/.blackmore --network=host --name=blackmore ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch} blackmored
-
+  then execute:
+bash ${buildDockerName}
     `)
   // enable autobuild
   // const child_process = require('child_process');
