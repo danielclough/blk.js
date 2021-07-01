@@ -45,11 +45,12 @@ const getInfo = async () => {
 	eurTotal = (eur * total).toFixed(3)
 
 	day = (hrs * 24).toFixed(2)
-	month = day (* 30.5).toFixed(2)
+	month = (day * 30.5).toFixed(2)
 	year = (day * 365).toFixed(2)
 	annualEarnBTC = (year * 1.5 * btc).toFixed(8)
 	annualEarnUSD = (year * 1.5 * usd).toFixed(3)
 	annualEarnEUR = (year * 1.5 * eur).toFixed(3)
+	annualizedRewardRate = (( year * 1.5 ) / total * 100).toFixed(2)
 
 	console.log(`
 	Client Overview:
@@ -65,6 +66,7 @@ const getInfo = async () => {
 		netstakeweight: ${staking.netstakeweight}
 		expectedtime: roughly ${hrs} hours per stake ~ ${day}/day ~ ${month}/month ~ ${year}/year 
 			Over a year you would earn ${annualEarnBTC} BTC / ${annualEarnUSD} USD / ${annualEarnEUR} EUR
+			Annualized Reward Rate: ${annualizedRewardRate}%
 
 		connections: ${network.connections}
 		subversion: ${network.subversion}
