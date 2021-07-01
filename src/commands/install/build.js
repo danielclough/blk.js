@@ -14,15 +14,15 @@ tar -C parts -c . | docker import - ${DockerHub.DockerHub}/blackcoin-more-minima
 docker image push ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch}
 docker container stop ubase
 
-if [[ -d ${/home/${process.env.USER}/.blackmore} ]]; then
-	echo '/home/${process.env.USER}/.blackmore exists, not creating /home/${process.env.USER}/.blackmore/blackmore.conf'
+if [[ -d /home/${process.env.USER}/.blackmore ]]; then
+echo '/home/${process.env.USER}/.blackmore exists, not creating /home/${process.env.USER}/.blackmore/blackmore.conf'
 else
-	echo sudo to create /home/${process.env.USER}/.blackmore/blackmore.conf as root
-	sudo mkdir /home/${process.env.USER}/.blackmore
-	sudo cat << EOF > /home/${process.env.USER}/.blackmore/blackmore.conf
-	rpcuser=${process.env.USER}
-	rpcpassword=${process.env.RPCPASSWORD}
-	EOF
+echo sudo to create /home/${process.env.USER}/.blackmore/blackmore.conf as root
+sudo mkdir /home/${process.env.USER}/.blackmore
+sudo bash -c 'cat << EOF > /home/daniel/.blackmore-test/blackmore.conf
+rpcuser=daniel
+rpcpassword=j77GUjKaca0vTgwA
+EOF'
 fi
 
 docker run -itd  -v /home/${process.env.USER}/.blackmore:/.blackmore --network=host --name=blackmore ${DockerHub.DockerHub}/blackcoin-more-minimal-${SYSTYPE}:${branch.branch} blackmored
