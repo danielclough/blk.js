@@ -1,6 +1,6 @@
 {
   "name": "blk.js",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Blackcoin Command Line Utility",
   "main": "index.js",
   "bin": {

@@ -19,27 +19,37 @@ const getInfo = async () => {
 	info = await getinfo()
 	network = await getnetworkinfo()
 	blockchain = await getblockchaininfo()
-	hrs = staking.expectedtime / 60 / 60
-	day = hrs * 24
 	total = wallet.total_balance
+	hrs = staking.expectedtime / 60 / 60
+	
 	btc = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=blackcoin&vs_currencies=btc").then(resp => {
-	    data = (resp.data["blackcoin"].btc * total).toFixed(8)
+	    data = (resp.data["blackcoin"].btc).toFixed(8)
 	    return data
 	}).catch(err => {
 	  console.log(err)
 	})
+	btcTotal = btc * total
 	usd = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=blackcoin&vs_currencies=usd").then(resp => {
-	    data = (resp.data["blackcoin"].usd * total).toFixed(3)
+	    data = (resp.data["blackcoin"].usd).toFixed(3)
 	    return data
 	}).catch(err => {
 	  console.log(err)
 	})
+	usdTotal = usd * total
 	eur = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=blackcoin&vs_currencies=eur").then(resp => {
-	    data = (resp.data["blackcoin"].eur * total).toFixed(3)
+	    data = (resp.data["blackcoin"].eur).toFixed(3)
 	    return data
 	}).catch(err => {
 	  console.log(err)
 	})
+	eurTotal = eur * total
+
+	day = hrs * 24
+	month = day * 30.5
+	year = day * 365
+	annualEarnBTC = (year * 1.5 * btc).toFixed(8)
+	annualEarnUSD = (year * 1.5 * usd).toFixed(3)
+	annualEarnEUR = (year * 1.5 * eur).toFixed(3)
 
 	console.log(`
 	Client Overview:
@@ -48,12 +58,13 @@ const getInfo = async () => {
 		txcount: ${wallet.txcount}
 		unconfirmed_balance: ${wallet.unconfirmed_balance}
 		immature_balance: ${wallet.immature_balance}
-		total_balance: ${total} (${btc} BTC; ${usd} USD; ${eur} EUR)
+		total_balance: ${total} (${btcTotal} BTC; ${usdTotal} USD; ${eurTotal} EUR)
 
 		enabled: ${staking.enabled}
 		staking: ${staking.staking}
 		netstakeweight: ${staking.netstakeweight}
-		expectedtime: roughly ${hrs} hours per stake ~ ${day} stakes per day
+		expectedtime: roughly ${hrs} hours per stake ~ ${day}/day ~ ${month}/month ~ ${year}/year 
+			Over a year you would earn ${annualEarnBTC} BTC / ${annualEarnUSD} USD / ${annualEarnEUR} EUR
 
 		connections: ${network.connections}
 		subversion: ${network.subversion}
