@@ -46,8 +46,8 @@ const getInfo = async () => {
 
 	hr = (min / 60).toFixed(2)
 	day = (hr / 24).toFixed(2)
-	month = (day / 30.5).toFixed(2)
-	year = (day / 365).toFixed(2)
+	month = (day * 30.5).toFixed(2)
+	year = (day * 365).toFixed(2)
 	annualEarnBTC = (year * 1.5 * btc).toFixed(8)
 	annualEarnUSD = (year * 1.5 * usd).toFixed(2)
 	annualEarnEUR = (year * 1.5 * eur).toFixed(2)
