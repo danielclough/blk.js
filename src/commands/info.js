@@ -20,7 +20,7 @@ const getInfo = async () => {
 	network = await getnetworkinfo()
 	blockchain = await getblockchaininfo()
 	total = wallet.total_balance
-	hrs = staking.expectedtime / 60 / 60
+	min = (staking.expectedtime / 60).toFixed(2)
 	
 	btc = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=blackcoin&vs_currencies=btc").then(resp => {
 	    data = (resp.data["blackcoin"].btc).toFixed(8)
@@ -44,7 +44,8 @@ const getInfo = async () => {
 	})
 	eurTotal = (eur * total).toFixed(3)
 
-	day = (hrs * 24).toFixed(2)
+	hr = (min * 60).toFixed(2)
+	day = (hr * 24).toFixed(2)
 	month = (day * 30.5).toFixed(2)
 	year = (day * 365).toFixed(2)
 	annualEarnBTC = (year * 1.5 * btc).toFixed(8)
@@ -54,18 +55,29 @@ const getInfo = async () => {
 
 	console.log(`
 	Client Overview:
-		balance: ${wallet.balance}
-		staked_balance: ${wallet.staked_balance}
-		txcount: ${wallet.txcount}
-		unconfirmed_balance: ${wallet.unconfirmed_balance}
-		immature_balance: ${wallet.immature_balance}
-		total_balance: ${total} (${btcTotal} BTC; ${usdTotal} USD; ${eurTotal} EUR)
+		balance: Ⓑ ${wallet.balance} BLK
+		staked_balance: Ⓑ ${wallet.staked_balance} BLK
+		txcount: Ⓑ ${wallet.txcount} BLK
+		unconfirmed_balance: Ⓑ ${wallet.unconfirmed_balance} BLK
+		immature_balance: Ⓑ ${wallet.immature_balance} BLK
+		total_balance: Ⓑ ${total} BLK
+			₿${btcTotal} BTC
+			\$${usdTotal} USD
+			€${eurTotal} EUR
 
 		enabled: ${staking.enabled}
 		staking: ${staking.staking}
 		netstakeweight: ${staking.netstakeweight}
-		expectedtime: roughly ${hrs} hours per stake ~ ${day}/day ~ ${month}/month ~ ${year}/year 
-			Over a year you would earn ${annualEarnBTC} BTC / ${annualEarnUSD} USD / ${annualEarnEUR} EUR
+		expectedtime: 
+			${hr}/hr
+			${day}/day
+			${month}/month
+			${year}/year 
+			
+			Over a year you would earn:
+				₿${annualEarnBTC} BTC
+				\$${annualEarnUSD} USD
+				€${annualEarnEUR} EUR
 			Annualized Reward Rate: ${annualizedRewardRate}%
 
 		connections: ${network.connections}
