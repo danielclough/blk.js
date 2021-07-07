@@ -55,20 +55,20 @@ const getInfo = async () => {
 
 	console.log(`
 	Client Overview:
-		balance: Ⓑ ${wallet.balance} BLK
-		staked_balance: Ⓑ ${wallet.staked_balance} BLK
-		txcount: Ⓑ ${wallet.txcount} BLK
-		unconfirmed_balance: Ⓑ ${wallet.unconfirmed_balance} BLK
-		immature_balance: Ⓑ ${wallet.immature_balance} BLK
-		total_balance: Ⓑ ${total} BLK
+		Balance: Ⓑ ${wallet.balance} BLK
+		Staked Balance: Ⓑ ${wallet.staked_balance} BLK
+		Tx Count: Ⓑ ${wallet.txcount} BLK
+		Unconfirmed Balance: Ⓑ ${wallet.unconfirmed_balance} BLK
+		Immature Balance: Ⓑ ${wallet.immature_balance} BLK
+		Total Balance: Ⓑ ${total} BLK
 			₿${btcTotal} BTC
 			\$${usdTotal} USD
 			€${eurTotal} EUR
 
-		enabled: ${staking.enabled}
-		staking: ${staking.staking}
-		netstakeweight: ${staking.netstakeweight}
-		expectedtime: 
+		Enabled: ${staking.enabled}
+		Staking: ${staking.staking}
+		Net Stake Weight: ${staking.netstakeweight}
+		Expected Stakes per unit of time: 
 			${hr}/hr
 			${day}/day
 			${month}/month
@@ -80,10 +80,10 @@ const getInfo = async () => {
 				€${annualEarnEUR} EUR
 			Annualized Reward Rate: ${annualizedRewardRate}%
 
-		connections: ${network.connections}
-		subversion: ${network.subversion}
-		blocks: ${info.blocks}
-		bestblockhash: ${blockchain.bestblockhash}
+		Connections: ${network.connections}
+		Subversion: ${network.subversion}
+		Blocks: ${info.blocks}
+		Bestblockhash: ${blockchain.bestblockhash}
 	`)
 }
 
